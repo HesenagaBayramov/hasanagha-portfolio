@@ -174,11 +174,11 @@ h1, h2, h3, .monogram, .hero-role { font-family: 'Bricolage Grotesque Variable',
   .menu-trigger { display: inline-flex; }
   .site-header { height: 68px; }
   .monogram { font-size: 24px; }
-  .mobile-nav { display: block; position: fixed; z-index: 20; top: 68px; left: 0; width: 100%; height: calc(100svh - 68px); padding: 98px 0 24px; overflow-y: auto; background: var(--bg); border-top: 1px solid var(--line); }
+  .mobile-nav { display: block; position: fixed; z-index: 20; top: 68px; left: 0; width: 100%; height: calc(100svh - 68px); padding: 62px 0 24px; overflow-y: auto; background: var(--bg); border-top: 1px solid var(--line); }
   body.menu-open { overflow: hidden; }
   .mobile-nav-inner { display: flex; flex-direction: column; min-height: 100%; }
   .mobile-nav a { padding: 12px 0; border-bottom: 1px solid var(--line); font-family: 'Bricolage Grotesque Variable', sans-serif; font-size: 26px; }
-  .mobile-utilities { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 98px; }
+  .mobile-utilities { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 32px; }
   .mobile-utilities button { gap: 8px; padding-inline: 10px; font-size: 13px; }
   .menu-footer { margin: auto 0 0; color: var(--subtle); font: 10px/1.6 'Geist Mono Variable', monospace; text-align: center; }
   .terminal-prompt { font-family: 'Geist Mono Variable', monospace; color: var(--accent); }
