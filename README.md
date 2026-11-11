@@ -21,4 +21,4 @@ The build is static and needs no Vercel adapter. Configure Vercel with `npm run 
 
 ## Audio credit
 
-The optional Terminal typing audio is adapted from [IBM M2 sound](https://commons.wikimedia.org/wiki/File:IBM_M2_sound.ogg) by Anonimski, released under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/). It is stored locally as a small MP3 and starts muted.
+The optional Terminal typing audio is an original synthesized digital text effect stored locally as a small MP3. It starts muted and plays only after the visitor enables sound.

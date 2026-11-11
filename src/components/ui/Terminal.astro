@@ -4,7 +4,7 @@ interface Props { copy: Copy }
 const { terminalCopy: t } = Astro.props.copy as Copy;
 ---
 <dialog id="terminal-dialog" class="terminal-dialog" aria-labelledby="terminal-title" data-transcript={t.transcript}>
-  <audio data-keyboard-audio src="/audio/ibm-m2-typing.mp3" preload="auto" loop aria-hidden="true"></audio>
+  <audio data-keyboard-audio src="/audio/digital-text.mp3" preload="auto" loop aria-hidden="true"></audio>
   <div class="terminal-shell">
     <div class="terminal-titlebar"><img class="icon-dark" src="/icons/window.svg" width="36" height="8" alt="" /><img class="icon-light" src="/icons/window-light.svg" width="36" height="8" alt="" /><span id="terminal-title">{t.title}</span><button type="button" class="terminal-x" data-terminal-close aria-label={t.close}>×</button></div>
     <div class="terminal-content">
@@ -20,7 +20,7 @@ const { terminalCopy: t } = Astro.props.copy as Copy;
   const soundButton = document.querySelector<HTMLButtonElement>('[data-sound-toggle]');
   const soundLabel = document.querySelector<HTMLElement>('[data-sound-label]');
   const keyboardAudio = dialog?.querySelector<HTMLAudioElement>('[data-keyboard-audio]');
-  if (keyboardAudio) { keyboardAudio.volume = 0.45; keyboardAudio.playbackRate = 2; }
+  if (keyboardAudio) keyboardAudio.volume = 0.45;
   const transcript = dialog?.dataset.transcript ?? '';
   const soundOnLabel = soundButton?.dataset.onLabel ?? '';
   const soundOffLabel = soundButton?.dataset.offLabel ?? '';
