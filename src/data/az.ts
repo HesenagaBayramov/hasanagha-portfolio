@@ -37,5 +37,5 @@ export const az: Copy = {
   contact: {
     label: 'ƏLAQƏ', title: 'Əlaqə saxlayaq.', intro: 'İş fürsəti, layihə və ya gördüyüm işlə bağlı sualınız var? Yazın, məmnuniyyətlə cavablandırım.', name: 'Adınız', email: 'E-poçtunuz', message: 'Mesajınız', placeholder: 'Mesajınızı yazın...', send: 'Mesaj göndər ↗', sending: 'Göndərilir…', success: 'Mesaj uğurla göndərildi.', errorTitle: 'Göndərmə uğursuz oldu.', error: 'Xəta baş verdi, yenidən cəhd edin. Yazdığınız məlumatlar formadadır.', unavailable: 'Forma hazırlanarkən mənə birbaşa e-poçt göndərə bilərsiniz.', footer: '© 2026 Həsənağa Bayramov · Gələcək penetrasiya testçisi'
   },
-  terminalCopy: { title: 'terminal / önizləmə', soundOff: 'SƏS BAĞLI', soundOn: 'SƏS AÇIQ', duration: '11 SAN / RƏQƏMSAL YAZI', skip: 'Keç', replay: 'Təkrar', close: 'Bağla', transcript: '$ whoami\nhasanagha\n\n$ cat focus.txt\noffensive security / web application security / red team\n\n$ ls projects/\nCampusSecure/' }
+  terminalCopy: { title: 'terminal / önizləmə', soundOff: 'SƏS BAĞLI', soundOn: 'SƏS AÇIQ', duration: '~7 SAN / KLAVİATURA SƏSİ', skip: 'Keç', replay: 'Təkrar', close: 'Bağla', transcript: '$ whoami\nhasanagha\n\n$ cat focus.txt\noffensive security / web application security / red team\n\n$ ls projects/\nCampusSecure/' }
 };

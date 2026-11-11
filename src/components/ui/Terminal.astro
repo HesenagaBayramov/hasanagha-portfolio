@@ -4,6 +4,7 @@ interface Props { copy: Copy }
 const { terminalCopy: t } = Astro.props.copy as Copy;
 ---
 <dialog id="terminal-dialog" class="terminal-dialog" aria-labelledby="terminal-title" data-transcript={t.transcript}>
+  <audio data-keyboard-audio src="/audio/ibm-m2-typing.mp3" preload="auto" loop aria-hidden="true"></audio>
   <div class="terminal-shell">
     <div class="terminal-titlebar"><img class="icon-dark" src="/icons/window.svg" width="36" height="8" alt="" /><img class="icon-light" src="/icons/window-light.svg" width="36" height="8" alt="" /><span id="terminal-title">{t.title}</span><button type="button" class="terminal-x" data-terminal-close aria-label={t.close}>×</button></div>
     <div class="terminal-content">
@@ -18,25 +19,26 @@ const { terminalCopy: t } = Astro.props.copy as Copy;
   const output = document.querySelector<HTMLElement>('#terminal-output');
   const soundButton = document.querySelector<HTMLButtonElement>('[data-sound-toggle]');
   const soundLabel = document.querySelector<HTMLElement>('[data-sound-label]');
+  const keyboardAudio = dialog?.querySelector<HTMLAudioElement>('[data-keyboard-audio]');
+  if (keyboardAudio) { keyboardAudio.volume = 0.45; keyboardAudio.playbackRate = 2; }
   const transcript = dialog?.dataset.transcript ?? '';
   const soundOnLabel = soundButton?.dataset.onLabel ?? '';
   const soundOffLabel = soundButton?.dataset.offLabel ?? '';
   let timer: number | undefined;
-  let audio: AudioContext | undefined;
   let soundOn = false;
+  let commandTyping = false;
   let opener: HTMLElement | null = null;
-  const stop = () => { if (timer) window.clearInterval(timer); timer = undefined; };
-  const keySound = () => {
-    if (!soundOn) return;
-    try {
-      audio ??= new AudioContext();
-      const oscillator = audio.createOscillator(); const gain = audio.createGain();
-      oscillator.type = 'sine'; oscillator.frequency.value = 480 + Math.random() * 120;
-      gain.gain.setValueAtTime(0.008, audio.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, audio.currentTime + 0.025);
-      oscillator.connect(gain).connect(audio.destination);
-      oscillator.start(); oscillator.stop(audio.currentTime + 0.025);
-    } catch { /* audio unavailable */ }
+  const syncSound = () => {
+    if (!keyboardAudio) return;
+    if (!soundOn || !commandTyping) { keyboardAudio.pause(); return; }
+    if (keyboardAudio.paused) void keyboardAudio.play().catch(() => { /* audio unavailable */ });
+  };
+  const stop = () => {
+    if (timer !== undefined) window.clearTimeout(timer);
+    timer = undefined;
+    commandTyping = false;
+    keyboardAudio?.pause();
+    if (keyboardAudio) keyboardAudio.currentTime = 0;
   };
   const play = () => {
     if (!output) return;
@@ -44,11 +46,21 @@ const { terminalCopy: t } = Astro.props.copy as Copy;
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) { output.textContent = transcript; return; }
     output.textContent = '';
     let position = 0;
-    timer = window.setInterval(() => {
+    const nextCharacter = () => {
       if (!output || position >= transcript.length) { stop(); return; }
-      output.textContent += transcript[position++];
-      if (transcript[position - 1] !== '\n' && position % 2 === 0) keySound();
-    }, Math.max(25, Math.round(11000 / transcript.length)));
+      const lineStart = transcript.lastIndexOf('\n', position - 1) + 1;
+      const isCommand = transcript.startsWith('$ ', lineStart);
+      const character = transcript[position++];
+      commandTyping = isCommand && character !== '\n';
+      syncSound();
+      output.textContent += character;
+      if (position >= transcript.length) { stop(); return; }
+      const delay = character === '\n'
+        ? transcript[position] === '\n' ? 220 : isCommand ? 150 : 250
+        : isCommand ? 90 : 30;
+      timer = window.setTimeout(nextCharacter, delay);
+    };
+    timer = window.setTimeout(nextCharacter, 90);
   };
   document.querySelectorAll<HTMLButtonElement>('[data-terminal-open]').forEach(button => button.addEventListener('click', () => {
     if (!dialog) return;
@@ -61,5 +73,5 @@ const { terminalCopy: t } = Astro.props.copy as Copy;
   dialog?.querySelector<HTMLButtonElement>('[data-terminal-replay]')?.addEventListener('click', play);
   dialog?.addEventListener('close', () => { stop(); soundOn = false; if (soundButton) soundButton.setAttribute('aria-pressed', 'false'); if (soundLabel) soundLabel.textContent = soundOffLabel; opener?.focus(); });
   dialog?.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
-  soundButton?.addEventListener('click', () => { soundOn = !soundOn; soundButton.setAttribute('aria-pressed', String(soundOn)); if (soundLabel) soundLabel.textContent = soundOn ? soundOnLabel : soundOffLabel; });
+  soundButton?.addEventListener('click', () => { soundOn = !soundOn; soundButton.setAttribute('aria-pressed', String(soundOn)); if (soundLabel) soundLabel.textContent = soundOn ? soundOnLabel : soundOffLabel; syncSound(); });
 </script>

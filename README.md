@@ -18,3 +18,7 @@ The contact form uses Web3Forms. Set `PUBLIC_WEB3FORMS_ACCESS_KEY` in the local 
 Place the current, user-approved CV at `public/cv/hasanagha-bayramov.pdf`. Until that file exists, the hero shows a disabled CV action and publishes no download link.
 
 The build is static and needs no Vercel adapter. Configure Vercel with `npm run build` and output directory `dist` if automatic Astro detection is unavailable. Content lives in `src/data/en.ts` and `src/data/az.ts`; verified project and certificate links live in `src/data/projects.ts` and `src/data/certificates.ts`.
+
+## Audio credit
+
+The optional Terminal typing audio is adapted from [IBM M2 sound](https://commons.wikimedia.org/wiki/File:IBM_M2_sound.ogg) by Anonimski, released under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/). It is stored locally as a small MP3 and starts muted.
