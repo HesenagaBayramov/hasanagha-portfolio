@@ -2,7 +2,7 @@
 
 **Updated:** 2026-11-11
 **Stage:** Implementation underway. Design/content/architecture and the implementation phase are approved.
-**Status:** Static Astro + TypeScript portfolio built locally; visual browser QA and live contact delivery remain open.
+**Status:** Static Astro + TypeScript portfolio built and pushed to GitHub `main`; initial responsive browser QA completed. Full section review and live contact delivery remain open.
 
 ## Product
 - Bilingual English-default `/` and Azerbaijani `/az` portfolio for Hasanagha Bayramov, centered on aspiring Offensive Security / penetration testing work.
@@ -42,10 +42,13 @@
 - Read generated HTML: seven sections in both routes, correct EN/AZ names, CampusSecure link; no missing CV href, Send disabled without key.
 - Temporary placeholder-key build: Send was enabled; then rebuilt with the key removed and confirmed the dummy value is absent.
 - Checked every referenced local SVG is nonempty. Checked root dimensions and callsites for the design icons.
-- Browser automation and local HTTP preview could not reach the dev server from this environment. Layout, keyboard interaction, and form behavior have not been verified in a browser; no live email delivery test has run.
+- Initial GitHub commit `7c1e2e6` was pushed and confirmed on `HesenagaBayramov/hasanagha-portfolio` `main`.
+- The sandboxed terminal could not reach localhost, while an allowed local request returned HTTP 200 and the in-app browser loaded the site. This was an execution-environment network boundary, not an Astro startup failure.
+- Browser QA checked hero at Figma 1440 × 900 and 1920 × 1080 sizes, EN/AZ mobile hero, light theme, mobile menu, and Terminal. Widths 320, 390, 768, 1440 and 1920 px had no horizontal overflow. Fixed desktop hero position, mobile menu scroll locking/spacing, narrow-mobile spacing, and Terminal transcript geometry. Skip revealed all text, Replay restarted, Close returned focus, and sound began muted.
+- Full visual comparison of every section, keyboard navigation, reduced-motion behavior, configured form states, and live inbox delivery remain unverified.
 
 ## Next actions
-1. Review rendered mobile (390 px), tablet, desktop (1440 px), and wide (1920 px), dark/light and EN/AZ against the Figma frames. Verify no text clipping, keyboard focus, reduced motion, Terminal timing, and interaction states. Fix any mismatches.
+1. Complete the remaining section-by-section dark/light and EN/AZ browser comparison with Figma; verify keyboard navigation, reduced motion, Terminal timing, and form states. Fix mismatches.
 2. Add the user-supplied current CV PDF and Web3Forms access key/account settings when available. Verify the form on the actual Vercel preview URL and owner inbox; confirm short retention and allowed host.
 3. Deploy to Vercel only after the visual and delivery checks, then verify final links, metadata, and downloads.
 

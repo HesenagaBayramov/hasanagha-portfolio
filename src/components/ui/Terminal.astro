@@ -51,7 +51,10 @@ const { terminalCopy: t } = Astro.props.copy as Copy;
     }, Math.max(25, Math.round(11000 / transcript.length)));
   };
   document.querySelectorAll<HTMLButtonElement>('[data-terminal-open]').forEach(button => button.addEventListener('click', () => {
-    if (!dialog) return; opener = button; dialog.showModal(); play(); dialog.querySelector<HTMLButtonElement>('[data-terminal-skip]')?.focus();
+    if (!dialog) return;
+    opener = button.closest('#mobile-nav') ? document.querySelector<HTMLElement>('[data-menu-toggle]') : button;
+    document.dispatchEvent(new Event('portfolio:close-menu'));
+    dialog.showModal(); play(); dialog.querySelector<HTMLButtonElement>('[data-terminal-skip]')?.focus();
   }));
   dialog?.querySelectorAll<HTMLButtonElement>('[data-terminal-close]').forEach(button => button.addEventListener('click', () => dialog.close()));
   dialog?.querySelector<HTMLButtonElement>('[data-terminal-skip]')?.addEventListener('click', () => { stop(); if (output) output.textContent = transcript; });
