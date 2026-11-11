@@ -1,0 +1,21 @@
+---
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import type { Copy, Locale } from '../data/types';
+import Header from './ui/Header.astro';
+import Terminal from './ui/Terminal.astro';
+import Hero from './sections/Hero.astro';
+import About from './sections/About.astro';
+import Projects from './sections/Projects.astro';
+import Education from './sections/Education.astro';
+import Certification from './sections/Certification.astro';
+import Skills from './sections/Skills.astro';
+import Contact from './sections/Contact.astro';
+interface Props { copy: Copy; locale: Locale }
+const { copy, locale } = Astro.props;
+const hasCv = existsSync(join(process.cwd(), 'public', 'cv', 'hasanagha-bayramov.pdf'));
+const hasFormKey = Boolean(import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY);
+---
+<Header copy={copy} locale={locale} />
+<main id="main"><Hero copy={copy} hasCv={hasCv} /><About copy={copy} /><Projects copy={copy} /><Education copy={copy} /><Certification copy={copy} /><Skills copy={copy} /><Contact copy={copy} hasFormKey={hasFormKey} /></main>
+<Terminal copy={copy} />

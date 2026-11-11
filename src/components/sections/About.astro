@@ -1,0 +1,22 @@
+---
+import type { Copy } from '../../data/types';
+interface Props { copy: Copy }
+const { about } = Astro.props.copy as Copy;
+---
+<section id="about" class="section about" aria-labelledby="about-title">
+  <div class="wrap section-inner about-grid">
+    <div class="about-left">
+      <p class="eyebrow"># {about.label}</p>
+      <h2 id="about-title">{about.title[0]}<br />{about.title[1]}</h2>
+      <dl class="quick-facts">
+        <div><dt>{about.facts[0]}</dt><dd>{about.studying.map(item => <span class="fact-line">{item}</span>)}</dd></div>
+        <div><dt>{about.facts[1]}</dt><dd class="tags">{about.focus.map(item => <span class="tag">{item}</span>)}</dd></div>
+        <div><dt>{about.facts[2]}</dt><dd class="tags">{about.stack.map(item => <span class="tag">{item}</span>)}</dd></div>
+      </dl>
+    </div>
+    <div class="about-story">
+      {about.paragraphs.map(text => <p>{text}</p>)}
+      <aside class="beyond"><p class="eyebrow">{about.beyondLabel}</p><p>{about.beyond}</p></aside>
+    </div>
+  </div>
+</section>

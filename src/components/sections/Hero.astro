@@ -1,0 +1,24 @@
+---
+import type { Copy } from '../../data/types';
+interface Props { copy: Copy; hasCv: boolean }
+const { copy, hasCv } = Astro.props;
+---
+<section id="top" class="hero" aria-labelledby="hero-title">
+  <div class="wrap hero-main">
+    <p class="eyebrow hero-eyebrow">{copy.eyebrow}</p>
+    <h1 id="hero-title">{copy.name}</h1>
+    <p class="hero-role">{copy.role}</p>
+    <p class="hero-description">{copy.description}</p>
+    <div class="hero-actions">
+      {hasCv ? <a class="outline-button" href="/cv/hasanagha-bayramov.pdf" download>{copy.cv}</a> : <span class="outline-button unavailable" title={copy.cvUnavailable} aria-label={copy.cvUnavailable}>{copy.cv}</span>}
+      <a class="filled-button" href="#projects">{copy.viewProjects}</a>
+      <a class="outline-button" href="#contact">{copy.getInTouch}</a>
+    </div>
+    <div class="hero-details">
+      <span>{copy.location}</span><span class="divider" aria-hidden="true"></span>
+      <a href="mailto:hsnagabayramov4@gmail.com">hsnagabayramov4@gmail.com ↗</a><span class="divider" aria-hidden="true"></span>
+      <span class="hero-social"><a href="https://github.com/HesenagaBayramov" target="_blank" rel="noopener noreferrer">GitHub ↗</a><span class="divider" aria-hidden="true"></span><a href="https://www.linkedin.com/in/hasanagha-bayramov-a4324134a/" target="_blank" rel="noopener noreferrer">LinkedIn</a></span>
+    </div>
+  </div>
+  <a class="scroll-cue" href="#about">{copy.scroll}</a>
+</section>

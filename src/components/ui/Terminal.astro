@@ -1,0 +1,62 @@
+---
+import type { Copy } from '../../data/types';
+interface Props { copy: Copy }
+const { terminalCopy: t } = Astro.props.copy as Copy;
+---
+<dialog id="terminal-dialog" class="terminal-dialog" aria-labelledby="terminal-title" data-transcript={t.transcript}>
+  <div class="terminal-shell">
+    <div class="terminal-titlebar"><img class="icon-dark" src="/icons/window.svg" width="36" height="8" alt="" /><img class="icon-light" src="/icons/window-light.svg" width="36" height="8" alt="" /><span id="terminal-title">{t.title}</span><button type="button" class="terminal-x" data-terminal-close aria-label={t.close}>×</button></div>
+    <div class="terminal-content">
+      <div class="terminal-transcript"><pre id="terminal-output" aria-live="off"></pre><span class="cursor" aria-hidden="true"></span></div>
+      <div class="terminal-settings"><button type="button" class="sound-toggle" data-sound-toggle data-on-label={t.soundOn} data-off-label={t.soundOff} aria-pressed="false"><img class="icon-dark" src="/icons/muted.svg" width="14" height="14" alt="" /><img class="icon-light" src="/icons/muted-light.svg" width="14" height="14" alt="" /><span class="sound-on-icon" aria-hidden="true">♪</span><span data-sound-label>{t.soundOff}</span></button><span>{t.duration}</span></div>
+      <div class="terminal-actions"><button type="button" class="outline-button" data-terminal-skip>{t.skip}</button><button type="button" class="outline-button" data-terminal-replay>{t.replay}</button><button type="button" class="outline-button" data-terminal-close>{t.close} ×</button></div>
+    </div>
+  </div>
+</dialog>
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('#terminal-dialog');
+  const output = document.querySelector<HTMLElement>('#terminal-output');
+  const soundButton = document.querySelector<HTMLButtonElement>('[data-sound-toggle]');
+  const soundLabel = document.querySelector<HTMLElement>('[data-sound-label]');
+  const transcript = dialog?.dataset.transcript ?? '';
+  const soundOnLabel = soundButton?.dataset.onLabel ?? '';
+  const soundOffLabel = soundButton?.dataset.offLabel ?? '';
+  let timer: number | undefined;
+  let audio: AudioContext | undefined;
+  let soundOn = false;
+  let opener: HTMLElement | null = null;
+  const stop = () => { if (timer) window.clearInterval(timer); timer = undefined; };
+  const keySound = () => {
+    if (!soundOn) return;
+    try {
+      audio ??= new AudioContext();
+      const oscillator = audio.createOscillator(); const gain = audio.createGain();
+      oscillator.type = 'sine'; oscillator.frequency.value = 480 + Math.random() * 120;
+      gain.gain.setValueAtTime(0.008, audio.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audio.currentTime + 0.025);
+      oscillator.connect(gain).connect(audio.destination);
+      oscillator.start(); oscillator.stop(audio.currentTime + 0.025);
+    } catch { /* audio unavailable */ }
+  };
+  const play = () => {
+    if (!output) return;
+    stop();
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { output.textContent = transcript; return; }
+    output.textContent = '';
+    let position = 0;
+    timer = window.setInterval(() => {
+      if (!output || position >= transcript.length) { stop(); return; }
+      output.textContent += transcript[position++];
+      if (transcript[position - 1] !== '\n' && position % 2 === 0) keySound();
+    }, Math.max(25, Math.round(11000 / transcript.length)));
+  };
+  document.querySelectorAll<HTMLButtonElement>('[data-terminal-open]').forEach(button => button.addEventListener('click', () => {
+    if (!dialog) return; opener = button; dialog.showModal(); play(); dialog.querySelector<HTMLButtonElement>('[data-terminal-skip]')?.focus();
+  }));
+  dialog?.querySelectorAll<HTMLButtonElement>('[data-terminal-close]').forEach(button => button.addEventListener('click', () => dialog.close()));
+  dialog?.querySelector<HTMLButtonElement>('[data-terminal-skip]')?.addEventListener('click', () => { stop(); if (output) output.textContent = transcript; });
+  dialog?.querySelector<HTMLButtonElement>('[data-terminal-replay]')?.addEventListener('click', play);
+  dialog?.addEventListener('close', () => { stop(); soundOn = false; if (soundButton) soundButton.setAttribute('aria-pressed', 'false'); if (soundLabel) soundLabel.textContent = soundOffLabel; opener?.focus(); });
+  dialog?.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+  soundButton?.addEventListener('click', () => { soundOn = !soundOn; soundButton.setAttribute('aria-pressed', String(soundOn)); if (soundLabel) soundLabel.textContent = soundOn ? soundOnLabel : soundOffLabel; });
+</script>

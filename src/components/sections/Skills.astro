@@ -1,0 +1,13 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+import type { Copy } from '../../data/types';
+interface Props { copy: Copy }
+const { skills: s } = Astro.props.copy as Copy;
+---
+<section id="skills" class="section" aria-labelledby="skills-title"><div class="wrap section-inner">
+  <SectionHeading id="skills" label={s.label} title={s.title} intro={s.intro} />
+  <div class="skills-grid">{s.cards.map(card => <article class="info-card skill-card">
+    <p class="eyebrow">{card.kicker}</p><h3>{card.title}</h3><p>{card.text}</p>
+    <div class="tags">{card.tags.map(tag => <span class="tag">{tag}</span>)}</div>
+  </article>)}</div>
+</div></section>

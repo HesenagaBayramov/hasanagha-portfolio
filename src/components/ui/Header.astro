@@ -1,0 +1,66 @@
+---
+import type { Copy, Locale } from '../../data/types';
+interface Props { copy: Copy; locale: Locale }
+const { copy, locale } = Astro.props;
+const ids = ['about', 'projects', 'education', 'certification', 'skills', 'contact'];
+---
+<header class="site-header wrap">
+  <a class="monogram" href="#top" aria-label={`${copy.name} — ${locale === 'az' ? 'ana səhifə' : 'home'}`}>HB.</a>
+  <nav class="desktop-nav" aria-label={locale === 'az' ? 'Əsas naviqasiya' : 'Main navigation'}>
+    {copy.nav.map((item, index) => <a href={`#${ids[index]}`}>{item}</a>)}
+  </nav>
+  <div class="header-controls">
+    <div class="language-switch" aria-label={locale === 'az' ? 'Dil seçimi' : 'Language selection'}>
+      <a href="/" lang="en" aria-current={locale === 'en' ? 'page' : undefined}>EN</a>
+      <a href="/az" lang="az" aria-current={locale === 'az' ? 'page' : undefined}>AZ</a>
+    </div>
+    <button class="icon-button theme-control desktop-control" type="button" data-theme-toggle aria-label={copy.themeLight} title={copy.themeLight}><img class="icon-dark" src="/icons/sun.svg" width="18" height="18" alt="" /><img class="icon-light" src="/icons/light-theme.svg" width="18" height="18" alt="" /></button>
+    <button class="outline-button terminal-trigger desktop-control" type="button" data-terminal-open>{copy.terminal}</button>
+    <button class="icon-button menu-trigger" type="button" data-menu-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label={locale === 'az' ? 'Menyunu aç' : 'Open menu'}><img data-menu-icon src="/icons/menu.svg" width="18" height="18" alt="" /></button>
+  </div>
+</header>
+<nav id="mobile-nav" class="mobile-nav" aria-label={locale === 'az' ? 'Mobil naviqasiya' : 'Mobile navigation'} hidden>
+  <div class="wrap mobile-nav-inner">
+    <p class="eyebrow">{copy.menuTitle}</p>
+    {copy.nav.map((item, index) => <a href={`#${ids[index]}`}>{item}</a>)}
+    <div class="mobile-utilities">
+      <button type="button" class="outline-button" data-theme-toggle><img class="icon-dark" src="/icons/menu-sun.svg" width="18" height="18" alt="" /><img class="icon-light" src="/icons/menu-theme-light.svg" width="18" height="18" alt="" /><span data-theme-label>{copy.themeLight}</span></button>
+      <button type="button" class="outline-button" data-terminal-open><span class="terminal-prompt" aria-hidden="true">&gt;_</span>{copy.terminal}</button>
+    </div>
+  </div>
+</nav>
+<script>
+  const root = document.documentElement;
+  const menu = document.querySelector<HTMLElement>('#mobile-nav');
+  const trigger = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menuIcon = document.querySelector<HTMLImageElement>('[data-menu-icon]');
+  const updateMenuIcon = () => {
+    if (!menuIcon || !trigger) return;
+    const light = root.dataset.theme === 'light';
+    const open = trigger.getAttribute('aria-expanded') === 'true';
+    menuIcon.src = `/icons/${open ? 'close-menu' : 'menu'}${light ? '-light' : ''}.svg`;
+  };
+  const setMenu = (open: boolean) => {
+    if (!menu || !trigger) return;
+    menu.hidden = !open;
+    trigger.setAttribute('aria-expanded', String(open));
+    updateMenuIcon();
+    trigger.setAttribute('aria-label', open ? (root.lang === 'az' ? 'Menyunu bağla' : 'Close menu') : (root.lang === 'az' ? 'Menyunu aç' : 'Open menu'));
+    if (open) menu.querySelector<HTMLAnchorElement>('a')?.focus();
+    else trigger.focus();
+  };
+  trigger?.addEventListener('click', () => setMenu(menu?.hidden ?? true));
+  menu?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', event => { if (event.key === 'Escape' && menu && !menu.hidden) setMenu(false); });
+  const updateThemeLabels = () => {
+    const label = root.dataset.theme === 'light' ? (root.lang === 'az' ? 'Tünd rejim' : 'Dark mode') : (root.lang === 'az' ? 'Açıq rejim' : 'Light mode');
+    document.querySelectorAll<HTMLElement>('[data-theme-toggle]').forEach(button => { button.setAttribute('aria-label', label); button.setAttribute('title', label); const text = button.querySelector<HTMLElement>('[data-theme-label]'); if (text) text.textContent = label; });
+    updateMenuIcon();
+  };
+  updateThemeLabels();
+  document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach(button => button.addEventListener('click', () => {
+    root.dataset.theme = root.dataset.theme === 'light' ? 'dark' : 'light';
+    try { localStorage.setItem('portfolio-theme', root.dataset.theme); } catch { /* storage unavailable */ }
+    updateThemeLabels();
+  }));
+</script>

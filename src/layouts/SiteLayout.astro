@@ -1,0 +1,25 @@
+---
+import '../styles/global.css';
+import type { Copy, Locale } from '../data/types';
+interface Props { copy: Copy; locale: Locale }
+const { copy, locale } = Astro.props;
+const title = `${copy.name} — ${copy.role}`;
+const description = copy.description;
+---
+<!doctype html>
+<html lang={locale} data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0b1520" />
+    <link rel="alternate" hreflang="en" href="/" />
+    <link rel="alternate" hreflang="az" href="/az" />
+    <title>{title}</title>
+    <script is:inline>try { document.documentElement.dataset.theme = localStorage.getItem('portfolio-theme') === 'light' ? 'light' : 'dark'; } catch { /* storage unavailable */ }</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{locale === 'az' ? 'Əsas məzmuna keç' : 'Skip to content'}</a>
+    <slot />
+  </body>
+</html>

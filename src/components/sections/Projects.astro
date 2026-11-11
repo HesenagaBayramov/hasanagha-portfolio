@@ -1,0 +1,38 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+import { campusSecure } from '../../data/projects';
+import type { Copy } from '../../data/types';
+interface Props { copy: Copy }
+const { projects: p } = Astro.props.copy as Copy;
+---
+<section id="projects" class="section" aria-labelledby="projects-title">
+  <div class="wrap section-inner">
+    <SectionHeading id="projects" label={p.label} title={p.title} intro={p.intro} />
+    <div class="project-grid">
+      <article class="project-card featured-project">
+        <div class="project-visual">
+          <p class="eyebrow">{p.featured}</p>
+          <div class="flow-chart">
+            <div class="flow-node"><strong>{p.portal}</strong><span>{p.portalSub}</span></div>
+            <div class="flow-stem"></div>
+            <div class="flow-node"><strong>{p.checks}</strong><span>{p.checksSub}</span></div>
+            <div class="flow-stem"></div>
+            <div class="flow-modes"><div><strong>{p.secure}</strong><span>{p.secureSub}</span></div><div><strong>{p.vulnerable}</strong><span>{p.vulnerableSub}</span></div></div>
+          </div>
+          <p class="eyebrow">{p.scenarios}</p>
+        </div>
+        <div class="project-body">
+          <p class="eyebrow">{p.featured}</p>
+          <h3>{campusSecure.name}</h3>
+          <p>{p.description}</p><p>{p.detail}</p>
+          <div class="tags">{[...campusSecure.technologies, p.access].map(item => <span class="tag">{item}</span>)}</div>
+          <div class="card-footer"><a class="small-action" href={campusSecure.url} target="_blank" rel="noopener noreferrer">{p.repository}</a></div>
+        </div>
+      </article>
+      {[0, 1].map(() => <div class="project-card future-card" aria-label={`${p.future}: ${p.coming}`}>
+        <div class="future-visual"><p class="eyebrow">{p.future}</p><span aria-hidden="true">+</span><p class="eyebrow">{p.futureMark}</p></div>
+        <div class="future-body"><h3>{p.coming}</h3><p>{p.futureDetail}</p></div>
+      </div>)}
+    </div>
+  </div>
+</section>
