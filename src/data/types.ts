@@ -1,7 +1,7 @@
 export type Locale = 'en' | 'az';
 
 export interface Copy {
-  name: string; role: string; description: string; eyebrow: string; location: string; scroll: string;
+  name: string; role: string; description: string; availability: string; eyebrow: string; location: string; scroll: string;
   nav: string[]; menuTitle: string; themeLight: string; themeDark: string; terminal: string;
   cv: string; cvUnavailable: string; viewProjects: string; getInTouch: string;
   about: { label: string; title: [string, string]; facts: [string, string, string]; studying: string[]; focus: string[]; stack: string[]; paragraphs: string[]; beyondLabel: string; beyond: string };

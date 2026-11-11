@@ -5,6 +5,7 @@ const { copy, hasCv } = Astro.props;
 ---
 <section id="top" class="hero" aria-labelledby="hero-title">
   <div class="wrap hero-main">
+    <p class="hero-availability">{copy.availability}</p>
     <p class="eyebrow hero-eyebrow">{copy.eyebrow}</p>
     <h1 id="hero-title">{copy.name}</h1>
     <p class="hero-role">{copy.role}</p>

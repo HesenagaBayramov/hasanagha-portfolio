@@ -3,6 +3,7 @@ import type { Copy } from './types';
 export const en: Copy = {
   name: 'Hasanagha Bayramov', role: 'Aspiring Penetration Tester',
   description: 'I’m building practical penetration-testing skills, currently focused on web application security.',
+  availability: 'Open to Cybersecurity Roles & Projects',
   eyebrow: 'OFFENSIVE SECURITY  /  WEB APPLICATION SECURITY  /  RED TEAM', location: 'Baku, Azerbaijan', scroll: 'SCROLL TO EXPLORE  ↓',
   nav: ['About', 'Projects', 'Education', 'Certification', 'Skills', 'Contact'], menuTitle: 'EXPLORE THE PORTFOLIO', themeLight: 'Light mode', themeDark: 'Dark mode', terminal: 'Terminal',
   cv: 'Download CV', cvUnavailable: 'CV coming soon', viewProjects: 'View Projects', getInTouch: 'Get in Touch',

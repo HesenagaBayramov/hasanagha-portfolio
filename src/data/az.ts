@@ -3,6 +3,7 @@ import type { Copy } from './types';
 export const az: Copy = {
   name: 'Həsənağa Bayramov', role: 'Penetrasiya testçisi olmağa hazırlaşıram',
   description: 'Praktiki penetrasiya testi bacarıqlarımı inkişaf etdirirəm; hazırda veb tətbiqlərin təhlükəsizliyinə fokuslanıram.',
+  availability: 'Kibertəhlükəsizlik üzrə iş və layihə imkanlarına açığam',
   eyebrow: 'HÜCUM YÖNÜMLÜ TƏHLÜKƏSİZLİK  /  VEB TƏTBİQLƏR  /  RED TEAM', location: 'Bakı, Azərbaycan', scroll: 'DAVAM ET  ↓',
   nav: ['Haqqımda', 'Layihələr', 'Təhsil', 'Sertifikatlar', 'Bacarıqlar', 'Əlaqə'], menuTitle: 'PORTFOLİONU KƏŞF ET', themeLight: 'Açıq rejim', themeDark: 'Tünd rejim', terminal: 'Terminal',
   cv: 'CV-ni yüklə', cvUnavailable: 'CV tezliklə', viewProjects: 'Layihələrə bax', getInTouch: 'Əlaqə saxla',
