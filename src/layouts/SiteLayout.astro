@@ -16,6 +16,14 @@ const description = copy.description;
     <link rel="alternate" hreflang="en" href="/" />
     <link rel="alternate" hreflang="az" href="/az" />
     <title>{title}</title>
+    <script is:inline>
+      const navigation = performance.getEntriesByType('navigation')[0];
+      if (navigation?.type === 'reload') {
+        history.scrollRestoration = 'manual';
+        history.replaceState(history.state, '', location.pathname + location.search);
+        addEventListener('pageshow', () => scrollTo({ top: 0, left: 0, behavior: 'instant' }), { once: true });
+      }
+    </script>
     <script is:inline>try { document.documentElement.dataset.theme = localStorage.getItem('portfolio-theme') === 'light' ? 'light' : 'dark'; } catch { /* storage unavailable */ }</script>
   </head>
   <body>
