@@ -291,3 +291,7 @@ A small append-only record of **meaningful finished tasks**. Entries should be s
 - **Files/modules:** `.gitattributes`, `public/cv/.gitkeep`, `src/components/ui/Header.astro`, `src/components/ui/Terminal.astro`, `src/styles/global.css`, and project memory.
 - **Verification:** In-browser EN/AZ mobile hero, light theme, menu, and Terminal observed; widths 320/390/768/1440/1920 px showed no horizontal overflow. Terminal Skip completed text, Replay restarted, Close returned focus, and sound started muted. Full section visual review, reduced-motion behavior, and actual contact delivery have not yet been checked.
 - **Next:** Push the QA fixes, finish section-level visual/accessibility checks, then configure the real CV and form and test inbox delivery before deployment.
+## 2026-11-11 — Configure local Web3Forms key
+- **Completed:** Added the user-supplied public Web3Forms access key to Git-ignored local `.env`. Both generated routes now enable the Send button. The key is not committed; Vercel environment configuration and live inbox delivery remain open.
+- **Files/modules:** Local `.env` plus `PROJECT_STATE.md` and `WORK_LOG.md`; no site source changes.
+- **Verification:** `git check-ignore .env` confirmed exclusion; `npm run check` passed with 0 diagnostics; `npm test` passed 3 adapter tests; `npm run build` generated both routes and their HTML showed Send enabled. No real form submission was sent.
