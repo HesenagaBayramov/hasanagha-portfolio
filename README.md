@@ -21,4 +21,4 @@ The build is static and needs no Vercel adapter. Configure Vercel with `npm run 
 
 ## Audio credit
 
-The optional Terminal typing audio is an original synthesized digital text effect stored locally as a small MP3. It starts muted and plays only after the visitor enables sound.
+The Terminal typing audio is an original synthesized digital text effect stored locally as a small MP3. It plays when the visitor opens Terminal, can be muted with its sound button, and does not play before that click.

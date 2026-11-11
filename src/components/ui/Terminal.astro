@@ -9,7 +9,7 @@ const { terminalCopy: t } = Astro.props.copy as Copy;
     <div class="terminal-titlebar"><img class="icon-dark" src="/icons/window.svg" width="36" height="8" alt="" /><img class="icon-light" src="/icons/window-light.svg" width="36" height="8" alt="" /><span id="terminal-title">{t.title}</span><button type="button" class="terminal-x" data-terminal-close aria-label={t.close}>×</button></div>
     <div class="terminal-content">
       <div class="terminal-transcript"><pre id="terminal-output" aria-live="off"></pre><span class="cursor" aria-hidden="true"></span></div>
-      <div class="terminal-settings"><button type="button" class="sound-toggle" data-sound-toggle data-on-label={t.soundOn} data-off-label={t.soundOff} aria-pressed="false"><img class="icon-dark" src="/icons/muted.svg" width="14" height="14" alt="" /><img class="icon-light" src="/icons/muted-light.svg" width="14" height="14" alt="" /><span class="sound-on-icon" aria-hidden="true">♪</span><span data-sound-label>{t.soundOff}</span></button><span>{t.duration}</span></div>
+      <div class="terminal-settings"><button type="button" class="sound-toggle" data-sound-toggle data-on-label={t.soundOn} data-off-label={t.soundOff} aria-pressed="true"><img class="icon-dark" src="/icons/muted.svg" width="14" height="14" alt="" /><img class="icon-light" src="/icons/muted-light.svg" width="14" height="14" alt="" /><span class="sound-on-icon" aria-hidden="true">♪</span><span data-sound-label>{t.soundOn}</span></button><span>{t.duration}</span></div>
       <div class="terminal-actions"><button type="button" class="outline-button" data-terminal-skip>{t.skip}</button><button type="button" class="outline-button" data-terminal-replay>{t.replay}</button><button type="button" class="outline-button" data-terminal-close>{t.close} ×</button></div>
     </div>
   </div>
@@ -25,7 +25,7 @@ const { terminalCopy: t } = Astro.props.copy as Copy;
   const soundOnLabel = soundButton?.dataset.onLabel ?? '';
   const soundOffLabel = soundButton?.dataset.offLabel ?? '';
   let timer: number | undefined;
-  let soundOn = false;
+  let soundOn = true;
   let typingCharacter = false;
   let playbackId = 0;
   let opener: HTMLElement | null = null;
@@ -79,7 +79,7 @@ const { terminalCopy: t } = Astro.props.copy as Copy;
   dialog?.querySelectorAll<HTMLButtonElement>('[data-terminal-close]').forEach(button => button.addEventListener('click', () => dialog.close()));
   dialog?.querySelector<HTMLButtonElement>('[data-terminal-skip]')?.addEventListener('click', () => { stop(); if (output) output.textContent = transcript; });
   dialog?.querySelector<HTMLButtonElement>('[data-terminal-replay]')?.addEventListener('click', () => { void play(); });
-  dialog?.addEventListener('close', () => { stop(); soundOn = false; if (soundButton) soundButton.setAttribute('aria-pressed', 'false'); if (soundLabel) soundLabel.textContent = soundOffLabel; opener?.focus(); });
+  dialog?.addEventListener('close', () => { stop(); opener?.focus(); });
   dialog?.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
   soundButton?.addEventListener('click', () => { soundOn = !soundOn; soundButton.setAttribute('aria-pressed', String(soundOn)); if (soundLabel) soundLabel.textContent = soundOn ? soundOnLabel : soundOffLabel; if (soundOn) void play(); else syncSound(); });
 </script>
