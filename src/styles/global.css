@@ -23,7 +23,7 @@ h1, h2, h3, .monogram, .hero-role { font-family: 'Bricolage Grotesque Variable',
 .outline-button:hover, .icon-button:hover { background: var(--line); color: var(--text); }
 .filled-button { min-height: 48px; padding: 12px 22px; border: 1px solid var(--accent); background: var(--accent); color: var(--accent-ink); font-size: 15px; font-weight: 600; }
 .filled-button:hover { filter: brightness(1.1); color: var(--accent-ink); }
-.filled-button:disabled { opacity: .65; cursor: wait; }
+.filled-button:disabled { opacity: .65; cursor: not-allowed; }
 .icon-button { width: 42px; height: 42px; border: 1px solid var(--line); background: var(--surface); color: var(--text); }
 .icon-button img, .social-links img, .terminal-titlebar img, .sound-toggle img { display: block; flex: none; }
 .icon-light, :root[data-theme='light'] .icon-dark { display: none !important; }

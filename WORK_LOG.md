@@ -295,3 +295,8 @@ A small append-only record of **meaningful finished tasks**. Entries should be s
 - **Completed:** Added the user-supplied public Web3Forms access key to Git-ignored local `.env`. Both generated routes now enable the Send button. The key is not committed; Vercel environment configuration and live inbox delivery remain open.
 - **Files/modules:** Local `.env` plus `PROJECT_STATE.md` and `WORK_LOG.md`; no site source changes.
 - **Verification:** `git check-ignore .env` confirmed exclusion; `npm run check` passed with 0 diagnostics; `npm test` passed 3 adapter tests; `npm run build` generated both routes and their HTML showed Send enabled. No real form submission was sent.
+
+## 2026-11-11 — Enable deployed contact form
+- **Completed:** Diagnosed the disabled Send button on the user's live Vercel page: Production lacked the build-time Web3Forms variable. Added the user-supplied public key to Vercel Production, redeployed, and corrected the disabled-button cursor from `wait` to `not-allowed` in source.
+- **Files/modules:** `src/styles/global.css`, `PROJECT_STATE.md`, `WORK_LOG.md`; Vercel Production environment variable.
+- **Verification:** Vercel reported the redeployment Ready; fresh EN and AZ pages showed enabled Send buttons. Live submission and inbox receipt remain untested.
