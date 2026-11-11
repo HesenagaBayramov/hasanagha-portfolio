@@ -4,3 +4,14 @@ dist/
 .env
 .env.*
 !.env.example
+
+# Local agent context and working drafts (keep on this computer)
+/AGENTS.md
+/ARCHITECTURE_PLAN.md
+/AZ_COPY_DRAFT.md
+/CODEX_START_HERE.md
+/DECISIONS.md
+/PORTFOLIO_BRIEF.md
+/PROJECT_STATE.md
+/SITE_STRUCTURE.md
+/WORK_LOG.md
