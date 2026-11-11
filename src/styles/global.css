@@ -47,7 +47,8 @@ h1, h2, h3, .monogram, .hero-role { font-family: 'Bricolage Grotesque Variable',
 .hero-description { margin: 24px auto 36px; max-width: 820px; color: var(--muted); font-size: 19px; line-height: 1.6; }
 .hero-actions { display: flex; justify-content: center; gap: 14px; }
 .hero-details { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 18px; margin-top: 36px; color: var(--subtle); font-size: 12px; }
-.hero-details a { color: var(--accent); }
+.hero-details a { color: var(--accent); text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 4px; transition: color .18s, text-decoration-color .18s; }
+.hero-details a:hover, .hero-details a:focus-visible { color: var(--text); text-decoration-color: currentColor; }
 .hero-details .divider { width: 1px; height: 14px; background: var(--line-strong); }
 .hero-social { display: inline-flex; align-items: center; gap: 18px; }
 .scroll-cue { color: var(--subtle); font-size: 11px; }
