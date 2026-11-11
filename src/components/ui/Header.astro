@@ -66,4 +66,45 @@ const ids = ['about', 'projects', 'education', 'certification', 'skills', 'conta
     try { localStorage.setItem('portfolio-theme', root.dataset.theme); } catch { /* storage unavailable */ }
     updateThemeLabels();
   }));
+  const sections = [...document.querySelectorAll<HTMLElement>('section[id]')];
+  let hashUpdateQueued = false;
+  let anchorTarget: string | undefined;
+  let anchorTimeout: number | undefined;
+  const updateHashForSection = () => {
+    hashUpdateQueued = false;
+    const marker = window.innerHeight * 0.35;
+    let activeId = 'top';
+    for (const section of sections) {
+      if (section.getBoundingClientRect().top > marker) break;
+      activeId = section.id;
+    }
+    if (anchorTarget && activeId !== anchorTarget) return;
+    if (anchorTarget) { anchorTarget = undefined; window.clearTimeout(anchorTimeout); }
+    const hash = activeId === 'top' ? '' : `#${activeId}`;
+    if (location.hash !== hash) history.replaceState(history.state, '', location.pathname + location.search + hash);
+  };
+  const queueHashUpdate = () => {
+    if (hashUpdateQueued) return;
+    hashUpdateQueued = true;
+    requestAnimationFrame(updateHashForSection);
+  };
+  const holdAnchorTarget = (target: string) => {
+    anchorTarget = target;
+    window.clearTimeout(anchorTimeout);
+    anchorTimeout = window.setTimeout(() => { anchorTarget = undefined; queueHashUpdate(); }, 1200);
+  };
+  document.addEventListener('click', event => {
+    if (!(event.target instanceof Element)) return;
+    const link = event.target.closest<HTMLAnchorElement>('a[href^="#"]');
+    const target = link?.hash.slice(1);
+    if (!target || !sections.some(section => section.id === target)) return;
+    holdAnchorTarget(target);
+  });
+  addEventListener('pageshow', () => {
+    const initialTarget = location.hash.slice(1);
+    if (sections.some(section => section.id === initialTarget)) holdAnchorTarget(initialTarget);
+    addEventListener('scroll', queueHashUpdate, { passive: true });
+    addEventListener('resize', queueHashUpdate);
+    queueHashUpdate();
+  }, { once: true });
 </script>
