@@ -26,17 +26,17 @@ const { terminalCopy: t } = Astro.props.copy as Copy;
   const soundOffLabel = soundButton?.dataset.offLabel ?? '';
   let timer: number | undefined;
   let soundOn = false;
-  let commandTyping = false;
+  let typingCharacter = false;
   let opener: HTMLElement | null = null;
   const syncSound = () => {
     if (!keyboardAudio) return;
-    if (!soundOn || !commandTyping) { keyboardAudio.pause(); return; }
+    if (!soundOn || !typingCharacter) { keyboardAudio.pause(); return; }
     if (keyboardAudio.paused) void keyboardAudio.play().catch(() => { /* audio unavailable */ });
   };
   const stop = () => {
     if (timer !== undefined) window.clearTimeout(timer);
     timer = undefined;
-    commandTyping = false;
+    typingCharacter = false;
     keyboardAudio?.pause();
     if (keyboardAudio) keyboardAudio.currentTime = 0;
   };
@@ -51,10 +51,10 @@ const { terminalCopy: t } = Astro.props.copy as Copy;
       const lineStart = transcript.lastIndexOf('\n', position - 1) + 1;
       const isCommand = transcript.startsWith('$ ', lineStart);
       const character = transcript[position++];
-      commandTyping = isCommand && character !== '\n';
+      typingCharacter = character !== '\n';
       syncSound();
       output.textContent += character;
-      if (position >= transcript.length) { stop(); return; }
+      if (position >= transcript.length) { timer = window.setTimeout(stop, isCommand ? 90 : 30); return; }
       const delay = character === '\n'
         ? transcript[position] === '\n' ? 220 : isCommand ? 150 : 250
         : isCommand ? 90 : 30;
