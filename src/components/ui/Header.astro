@@ -5,7 +5,7 @@ const { copy, locale } = Astro.props;
 const ids = ['about', 'projects', 'education', 'certification', 'skills', 'contact'];
 ---
 <header class="site-header wrap">
-  <a class="monogram" href="#top" aria-label={`${copy.name} — ${locale === 'az' ? 'ana səhifə' : 'home'}`}>HB.</a>
+  <a class="monogram" href="#top" aria-label={`HB. — ${copy.name}, ${locale === 'az' ? 'ana səhifə' : 'home'}`}>HB.</a>
   <nav class="desktop-nav" aria-label={locale === 'az' ? 'Əsas naviqasiya' : 'Main navigation'}>
     {copy.nav.map((item, index) => <a href={`#${ids[index]}`}>{item}</a>)}
   </nav>

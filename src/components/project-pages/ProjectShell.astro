@@ -11,7 +11,7 @@ const index = locale === 'az' ? '/az/projects' : '/projects';
 ---
 <SiteLayout copy={copy} locale={locale} pageTitle={title} pageDescription={description} pagePath={path} alternatePath={alternatePath}>
   <header class="project-page-header wrap">
-    <a class="monogram" href={home} aria-label={`${copy.name} — ${t.navHome}`}>HB.</a>
+    <a class="monogram" href={home} aria-label={`HB. — ${copy.name}, ${t.navHome}`}>HB.</a>
     <nav class="project-page-nav" aria-label={locale === 'az' ? 'Əsas naviqasiya' : 'Main navigation'}>
       <a href={home}>{t.navHome}</a>
       <a href={index} aria-current={path === index ? 'page' : undefined}>{t.navProjects}</a>
