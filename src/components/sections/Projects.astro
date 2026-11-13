@@ -30,7 +30,7 @@ const { projects: p } = Astro.props.copy as Copy;
         </div>
       </article>
       {[0, 1].map(() => <div class="project-card future-card" aria-label={`${p.future}: ${p.coming}`}>
-        <div class="future-visual"><p class="eyebrow">{p.future}</p><span aria-hidden="true">+</span><p class="eyebrow">{p.futureMark}</p></div>
+        <div class="future-visual"><p class="eyebrow">{p.future}</p><span aria-hidden="true"><svg width="34" height="34" viewBox="0 0 34 34" fill="none"><path d="M17 2v30M2 17h30" stroke="currentColor" stroke-width="3" /></svg></span><p class="eyebrow">{p.futureMark}</p></div>
         <div class="future-body"><h3>{p.coming}</h3><p>{p.futureDetail}</p></div>
       </div>)}
     </div>
