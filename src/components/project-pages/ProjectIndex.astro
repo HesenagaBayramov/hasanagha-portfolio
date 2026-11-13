@@ -14,16 +14,12 @@ const detail = locale === 'az' ? '/az/projects/campussecure' : '/projects/campus
     <p>{t.indexIntro}</p>
   </div>
   <article class="showcase-card">
-    <div class="showcase-art" aria-hidden="true">
-      <div class="showcase-window">
-        <div class="showcase-window-top"><span></span><span></span><span></span><b>CampusSecure</b></div>
-        <div class="showcase-window-body">
-          <div class="showcase-sidebar"><i></i><i></i><i></i><i></i></div>
-          <div class="showcase-panels"><span></span><div><i></i><i></i></div><div><i></i><i></i></div></div>
-        </div>
+    <figure class="showcase-art">
+      <div class="showcase-image-stack">
+        <img src="/projects/campussecure/login.jpg" width="1178" height="817" alt={t.loginAlt} decoding="async" />
+        <figcaption class="showcase-art-caption">{t.visualCaption}</figcaption>
       </div>
-      <span class="showcase-art-caption">{t.visualCaption}</span>
-    </div>
+    </figure>
     <div class="showcase-content">
       <p class="eyebrow">{t.featured}</p>
       <h2>{campusSecure.name}</h2>
