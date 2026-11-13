@@ -1,18 +1,19 @@
 ---
 import SectionHeading from '../ui/SectionHeading.astro';
+import { educationLinks } from '../../data/education';
 import type { Copy } from '../../data/types';
 interface Props { copy: Copy }
 const { education: e } = Astro.props.copy as Copy;
 const cards = [
-  { date: e.year, badge: e.thirdYear, kind: e.kinds[0], name: e.university, program: e.universityProgram, description: e.universityDescription, footer: e.universityFooter },
-  { date: e.start, badge: e.current, kind: e.kinds[1], name: e.training, program: e.trainingProgram, description: e.trainingDescription, footer: e.trainingFooter }
+  { date: e.year, badge: e.thirdYear, kind: e.kinds[0], name: e.university, url: educationLinks.asoiu, program: e.universityProgram, description: e.universityDescription, footer: e.universityFooter },
+  { date: e.start, badge: e.current, kind: e.kinds[1], name: e.training, url: educationLinks.millisecRedTeam, program: e.trainingProgram, description: e.trainingDescription, footer: e.trainingFooter }
 ];
 ---
 <section id="education" class="section" aria-labelledby="education-title"><div class="wrap section-inner">
   <SectionHeading id="education" label={e.label} title={e.title} intro={e.intro} />
   <div class="two-grid">{cards.map(card => <article class="info-card education-card">
     <div class="card-top"><span>{card.date}</span><span class="status-tag">{card.badge}</span></div>
-    <div><p class="eyebrow">{card.kind}</p><h3>{card.name}</h3><p class="card-subtitle">{card.program}</p><p>{card.description}</p></div>
+    <div><p class="eyebrow">{card.kind}</p><h3><a class="education-link" href={card.url} target="_blank" rel="noopener noreferrer" aria-label={`${card.name} — ${e.externalLink}`}><span>{card.name}</span><span class="external-arrow" aria-hidden="true">↗</span></a></h3><p class="card-subtitle">{card.program}</p><p>{card.description}</p></div>
     <p class="card-bottom">{card.footer}</p>
   </article>)}</div>
 </div></section>

@@ -106,6 +106,9 @@ h1, h2, h3, .monogram, .hero-role { font-family: 'Bricolage Grotesque Variable',
 .card-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--accent); font-size: 12px; }
 .status-tag { padding: 6px 10px; border: 1px solid var(--line-strong); border-radius: 5px; font-size: 10px; white-space: nowrap; }
 .info-card h3 { margin: 12px 0 5px; font-size: 28px; line-height: 1.22; }
+.education-link { color: inherit; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 5px; transition: color .18s, text-decoration-color .18s; }
+.education-link:hover, .education-link:focus-visible { color: var(--accent); text-decoration-color: currentColor; }
+.education-link .external-arrow { display: inline-block; margin-left: 6px; color: var(--accent); font-family: 'Geist Mono Variable', monospace; font-size: .65em; vertical-align: .15em; }
 .info-card p:not(.eyebrow):not(.card-bottom) { color: var(--muted); font-size: 14px; line-height: 1.6; }
 .card-subtitle { color: var(--accent) !important; }
 .card-bottom { margin: 0; padding-top: 12px; border-top: 1px solid var(--line); color: var(--subtle); font-size: 11px; }
