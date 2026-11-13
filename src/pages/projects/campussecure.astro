@@ -1,0 +1,8 @@
+---
+import ProjectShell from '../../components/project-pages/ProjectShell.astro';
+import CampusSecurePage from '../../components/project-pages/CampusSecurePage.astro';
+import { en } from '../../data/en';
+import { projectPages } from '../../data/projectPages';
+const t = projectPages.en;
+---
+<ProjectShell copy={en} locale="en" title={t.detailTitle} description={t.detailIntro} path="/projects/campussecure" alternatePath="/az/projects/campussecure"><CampusSecurePage locale="en" /></ProjectShell>

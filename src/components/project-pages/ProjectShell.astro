@@ -1,0 +1,53 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import '../../styles/project-pages.css';
+import { projectPages } from '../../data/projectPages';
+import type { Copy, Locale } from '../../data/types';
+interface Props { copy: Copy; locale: Locale; title: string; description: string; path: string; alternatePath: string }
+const { copy, locale, title, description, path, alternatePath } = Astro.props;
+const t = projectPages[locale];
+const home = locale === 'az' ? '/az' : '/';
+const index = locale === 'az' ? '/az/projects' : '/projects';
+---
+<SiteLayout copy={copy} locale={locale} pageTitle={title} pageDescription={description} pagePath={path} alternatePath={alternatePath}>
+  <header class="project-page-header wrap">
+    <a class="monogram" href={home} aria-label={`${copy.name} — ${t.navHome}`}>HB.</a>
+    <nav class="project-page-nav" aria-label={locale === 'az' ? 'Əsas naviqasiya' : 'Main navigation'}>
+      <a href={home}>{t.navHome}</a>
+      <a href={index} aria-current={path === index ? 'page' : undefined}>{t.navProjects}</a>
+      <a href={`${home}#contact`}>{t.navContact}</a>
+    </nav>
+    <div class="project-page-controls">
+      <div class="language-switch" aria-label={locale === 'az' ? 'Dil seçimi' : 'Language selection'}>
+        <a href={locale === 'en' ? path : alternatePath} lang="en" aria-current={locale === 'en' ? 'page' : undefined}>EN</a>
+        <a href={locale === 'az' ? path : alternatePath} lang="az" aria-current={locale === 'az' ? 'page' : undefined}>AZ</a>
+      </div>
+      <button class="icon-button theme-control" type="button" data-project-theme aria-label={t.themeLight} title={t.themeLight}>
+        <img class="icon-dark" src="/icons/sun.svg" width="18" height="18" alt="" />
+        <img class="icon-light" src="/icons/light-theme.svg" width="18" height="18" alt="" />
+      </button>
+    </div>
+  </header>
+  <main id="main"><slot /></main>
+  <footer class="project-page-footer wrap">
+    <span>{t.footer}</span>
+    <a href={home}>{t.navHome} ↗</a>
+  </footer>
+</SiteLayout>
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-project-theme]');
+  const updateLabel = () => {
+    if (!toggle) return;
+    const light = document.documentElement.dataset.theme === 'light';
+    const label = light ? (document.documentElement.lang === 'az' ? 'Tünd rejim' : 'Dark mode') : (document.documentElement.lang === 'az' ? 'Açıq rejim' : 'Light mode');
+    toggle.setAttribute('aria-label', label);
+    toggle.title = label;
+  };
+  updateLabel();
+  toggle?.addEventListener('click', () => {
+    const root = document.documentElement;
+    root.dataset.theme = root.dataset.theme === 'light' ? 'dark' : 'light';
+    try { localStorage.setItem('portfolio-theme', root.dataset.theme); } catch { /* storage unavailable */ }
+    updateLabel();
+  });
+</script>

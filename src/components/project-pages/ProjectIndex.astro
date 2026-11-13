@@ -1,0 +1,40 @@
+---
+import { campusSecure } from '../../data/projects';
+import { projectPages } from '../../data/projectPages';
+import type { Locale } from '../../data/types';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = projectPages[locale];
+const detail = locale === 'az' ? '/az/projects/campussecure' : '/projects/campussecure';
+---
+<div class="wrap project-index-page">
+  <div class="project-page-intro">
+    <p class="eyebrow">{t.indexLabel}</p>
+    <h1>{t.indexTitle}</h1>
+    <p>{t.indexIntro}</p>
+  </div>
+  <article class="showcase-card">
+    <div class="showcase-art" aria-hidden="true">
+      <div class="showcase-window">
+        <div class="showcase-window-top"><span></span><span></span><span></span><b>CampusSecure</b></div>
+        <div class="showcase-window-body">
+          <div class="showcase-sidebar"><i></i><i></i><i></i><i></i></div>
+          <div class="showcase-panels"><span></span><div><i></i><i></i></div><div><i></i><i></i></div></div>
+        </div>
+      </div>
+      <span class="showcase-art-caption">{t.visualCaption}</span>
+    </div>
+    <div class="showcase-content">
+      <p class="eyebrow">{t.featured}</p>
+      <h2>{campusSecure.name}</h2>
+      <p class="showcase-lead">{t.indexProjectIntro}</p>
+      <p>{t.indexProjectDetail}</p>
+      <div class="tags">{[...campusSecure.technologies, locale === 'az' ? 'Girişə nəzarət' : 'Access control'].map(item => <span class="tag">{item}</span>)}</div>
+      <div class="showcase-actions">
+        <a class="filled-button" href={detail}>{t.viewCaseStudy} <span aria-hidden="true">→</span></a>
+        <a class="showcase-repo" href={campusSecure.url} target="_blank" rel="noopener noreferrer">{t.repository}</a>
+      </div>
+    </div>
+  </article>
+  <p class="project-index-note">{t.oneProject}</p>
+</div>

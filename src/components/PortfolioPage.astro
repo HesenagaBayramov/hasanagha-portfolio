@@ -17,5 +17,5 @@ const hasCv = existsSync(join(process.cwd(), 'public', 'cv', 'hasanagha-bayramov
 const hasFormKey = Boolean(import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY);
 ---
 <Header copy={copy} locale={locale} />
-<main id="main"><Hero copy={copy} hasCv={hasCv} /><About copy={copy} /><Projects copy={copy} /><Education copy={copy} /><Certification copy={copy} /><Skills copy={copy} /><Contact copy={copy} hasFormKey={hasFormKey} /></main>
+<main id="main"><Hero copy={copy} hasCv={hasCv} /><About copy={copy} /><Projects copy={copy} locale={locale} /><Education copy={copy} /><Certification copy={copy} /><Skills copy={copy} /><Contact copy={copy} hasFormKey={hasFormKey} /></main>
 <Terminal copy={copy} />

@@ -1,0 +1,8 @@
+---
+import ProjectShell from '../../components/project-pages/ProjectShell.astro';
+import ProjectIndex from '../../components/project-pages/ProjectIndex.astro';
+import { en } from '../../data/en';
+import { projectPages } from '../../data/projectPages';
+const t = projectPages.en;
+---
+<ProjectShell copy={en} locale="en" title={t.indexTitle} description={t.indexIntro} path="/projects" alternatePath="/az/projects"><ProjectIndex locale="en" /></ProjectShell>

@@ -1,13 +1,16 @@
 ---
 import SectionHeading from '../ui/SectionHeading.astro';
 import { campusSecure } from '../../data/projects';
-import type { Copy } from '../../data/types';
-interface Props { copy: Copy }
+import type { Copy, Locale } from '../../data/types';
+interface Props { copy: Copy; locale: Locale }
 const { projects: p } = Astro.props.copy as Copy;
+const indexPath = Astro.props.locale === 'az' ? '/az/projects' : '/projects';
+const detailPath = Astro.props.locale === 'az' ? '/az/projects/campussecure' : '/projects/campussecure';
 ---
 <section id="projects" class="section" aria-labelledby="projects-title">
   <div class="wrap section-inner">
     <SectionHeading id="projects" label={p.label} title={p.title} intro={p.intro} />
+    <a class="projects-index-link" href={indexPath}>{p.allProjects}</a>
     <div class="project-grid">
       <article class="project-card featured-project">
         <div class="project-visual">
@@ -26,7 +29,7 @@ const { projects: p } = Astro.props.copy as Copy;
           <h3>{campusSecure.name}</h3>
           <p>{p.description}</p><p>{p.detail}</p>
           <div class="tags">{[...campusSecure.technologies, p.access].map(item => <span class="tag">{item}</span>)}</div>
-          <div class="card-footer"><a class="small-action" href={campusSecure.url} target="_blank" rel="noopener noreferrer">{p.repository}</a></div>
+          <div class="card-footer"><a class="small-action" href={detailPath}>{p.explore}</a><a class="project-repository-link" href={campusSecure.url} target="_blank" rel="noopener noreferrer">{p.repository}</a></div>
         </div>
       </article>
       {[0, 1].map(() => <div class="project-card future-card" aria-label={`${p.future}: ${p.coming}`}>

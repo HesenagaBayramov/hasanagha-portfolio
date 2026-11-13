@@ -1,12 +1,14 @@
 ---
 import '../styles/global.css';
 import type { Copy, Locale } from '../data/types';
-interface Props { copy: Copy; locale: Locale }
-const { copy, locale } = Astro.props;
-const title = `${copy.name} — ${copy.role}`;
-const description = copy.description;
+interface Props { copy: Copy; locale: Locale; pageTitle?: string; pageDescription?: string; pagePath?: string; alternatePath?: string }
+const { copy, locale, pageTitle, pageDescription, pagePath, alternatePath } = Astro.props;
+const title = pageTitle ? `${pageTitle} — ${copy.name}` : `${copy.name} — ${copy.role}`;
+const description = pageDescription ?? copy.description;
 const origin = 'https://hasanaghabayramov.vercel.app';
-const pageUrl = `${origin}${locale === 'az' ? '/az' : '/'}`;
+const pageUrl = `${origin}${pagePath ?? (locale === 'az' ? '/az' : '/')}`;
+const enUrl = `${origin}${locale === 'en' ? (pagePath ?? '/') : (alternatePath ?? '/')}`;
+const azUrl = `${origin}${locale === 'az' ? (pagePath ?? '/az') : (alternatePath ?? '/az')}`;
 const imageUrl = `${origin}/og/portfolio-${locale}-v2.png`;
 const imageAlt = locale === 'az'
   ? 'Tünd fonda bir sətirdə Həsənağa Bayramovun adı və peşə istiqaməti.'
@@ -20,8 +22,8 @@ const imageAlt = locale === 'az'
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0b1520" />
     <link rel="canonical" href={pageUrl} />
-    <link rel="alternate" hreflang="en" href={`${origin}/`} />
-    <link rel="alternate" hreflang="az" href={`${origin}/az`} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="az" href={azUrl} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

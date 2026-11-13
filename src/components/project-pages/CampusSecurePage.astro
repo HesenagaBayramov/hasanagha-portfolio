@@ -1,0 +1,59 @@
+---
+import { campusSecure } from '../../data/projects';
+import { projectPages } from '../../data/projectPages';
+import type { Locale } from '../../data/types';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = projectPages[locale];
+const index = locale === 'az' ? '/az/projects' : '/projects';
+---
+<div class="wrap case-study-page">
+  <nav class="project-breadcrumb" aria-label={locale === 'az' ? 'Səhifə yolu' : 'Breadcrumb'}>
+    <a href={index}>← {t.backToProjects}</a><span aria-hidden="true">/</span><span>CampusSecure</span>
+  </nav>
+  <header class="case-hero">
+    <p class="eyebrow">{t.detailLabel}</p>
+    <h1>{t.detailTitle}</h1>
+    <p class="case-hero-intro">{t.detailIntro}</p>
+    <div class="case-hero-bottom">
+      <div class="tags">{[...campusSecure.technologies, locale === 'az' ? 'Girişə nəzarət' : 'Access control'].map(item => <span class="tag">{item}</span>)}</div>
+      <a class="outline-button" href={campusSecure.url} target="_blank" rel="noopener noreferrer">{t.repository}</a>
+    </div>
+  </header>
+  <section class="case-section case-purpose" aria-labelledby="purpose-title">
+    <p class="eyebrow">{t.projectPurpose}</p>
+    <h2 id="purpose-title">{t.purposeTitle}</h2>
+    <p>{t.purposeBody}</p>
+  </section>
+  <section class="case-section" aria-labelledby="how-title">
+    <p class="eyebrow">{t.howLabel}</p>
+    <h2 id="how-title">{t.howTitle}</h2>
+    <p class="case-section-intro">{t.howIntro}</p>
+    <div class="mode-comparison">
+      <div class="mode-card secure-mode"><span class="mode-indicator" aria-hidden="true"></span><h3>{t.secure}</h3><p>{t.secureDetail}</p></div>
+      <div class="mode-card vulnerable-mode"><span class="mode-indicator" aria-hidden="true"></span><h3>{t.vulnerable}</h3><p>{t.vulnerableDetail}</p></div>
+    </div>
+  </section>
+  <section class="case-section" aria-labelledby="scenarios-title">
+    <p class="eyebrow">{t.scenariosLabel}</p>
+    <h2 id="scenarios-title">{t.scenariosTitle}</h2>
+    <div class="scenario-grid">
+      {t.scenarios.map(scenario => <article class="scenario-card">
+        <div class="scenario-top"><span>{scenario.number}</span><span>{scenario.principle}</span></div>
+        <h3>{scenario.title}</h3>
+        <p>{scenario.question}</p>
+        <p class="scenario-outcome">{scenario.contrast}</p>
+      </article>)}
+    </div>
+  </section>
+  <section class="case-section case-takeaway" aria-labelledby="takeaway-title">
+    <div><p class="eyebrow">{t.takeawayLabel}</p><h2 id="takeaway-title">{t.takeawayTitle}</h2><p>{t.takeawayBody}</p></div>
+    <aside><p class="eyebrow">{t.scopeLabel}</p><p>{t.scopeBody}</p></aside>
+  </section>
+  <section class="case-section case-source" aria-labelledby="source-title">
+    <p class="eyebrow">{t.sourceLabel}</p>
+    <h2 id="source-title">{t.sourceTitle}</h2>
+    <p>{t.sourceBody}</p>
+    <div class="case-source-actions"><a class="filled-button" href={campusSecure.url} target="_blank" rel="noopener noreferrer">{t.repository}</a><a href={index}>← {t.backToProjects}</a></div>
+  </section>
+</div>
