@@ -12,7 +12,7 @@ const { copy, hasCv } = Astro.props;
     <p class="hero-role">{copy.role}</p>
     <p class="hero-description">{copy.description}</p>
     <div class="hero-actions">
-      {hasCv ? <a class="outline-button" href="/cv/hasanagha-bayramov.pdf" download>{copy.cv}</a> : <span class="outline-button unavailable" title={copy.cvUnavailable} aria-label={copy.cvUnavailable}>{copy.cv}</span>}
+      {hasCv ? <a class="outline-button" href="/cv/hasanagha-bayramov.pdf" target="_blank" rel="noopener noreferrer" aria-label={copy.cvOpenNewTab}>{copy.cv}</a> : <span class="outline-button unavailable" title={copy.cvUnavailable} aria-label={copy.cvUnavailable}>{copy.cv}</span>}
       <a class="filled-button" href="#projects">{copy.viewProjects}</a>
       <a class="outline-button" href="#contact">{copy.getInTouch}</a>
     </div>

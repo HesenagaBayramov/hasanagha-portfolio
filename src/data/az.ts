@@ -6,7 +6,7 @@ export const az: Copy = {
   availability: 'Kibertəhlükəsizlik üzrə iş və layihə imkanlarına açığam',
   eyebrow: 'HÜCUM YÖNÜMLÜ TƏHLÜKƏSİZLİK  /  VEB TƏTBİQLƏR  /  RED TEAM', location: 'Bakı, Azərbaycan', scroll: 'DAVAM ET  ↓',
   nav: ['Haqqımda', 'Layihələr', 'Təhsil', 'Sertifikatlar', 'Bacarıqlar', 'Əlaqə'], menuTitle: 'PORTFOLİONU KƏŞF ET', themeLight: 'Açıq rejim', themeDark: 'Tünd rejim', terminal: 'Terminal',
-  cv: 'CV-ni yüklə', cvUnavailable: 'CV tezliklə', viewProjects: 'Layihələrə bax', getInTouch: 'Əlaqə saxla',
+  cv: 'CV-yə bax', cvOpenNewTab: 'CV-yə bax (yeni tabda açılır)', cvUnavailable: 'CV tezliklə', viewProjects: 'Layihələrə bax', getInTouch: 'Əlaqə saxla',
   about: {
     label: 'HAQQIMDA', title: ['Koddan təhlükəsizliyə.', 'Maraqla irəliləyirəm.'], facts: ['TƏHSİL', 'İSTİQAMƏT', 'TEXNİKİ BAZA'],
     studying: ['ASOIU · Kompüter mühəndisliyi', 'MilliSec · Red Team / Penetrasiya testi'],

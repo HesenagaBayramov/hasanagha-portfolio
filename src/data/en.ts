@@ -6,7 +6,7 @@ export const en: Copy = {
   availability: 'Open to Cybersecurity Roles & Projects',
   eyebrow: 'OFFENSIVE SECURITY  /  WEB APPLICATION SECURITY  /  RED TEAM', location: 'Baku, Azerbaijan', scroll: 'SCROLL TO EXPLORE  ↓',
   nav: ['About', 'Projects', 'Education', 'Certification', 'Skills', 'Contact'], menuTitle: 'EXPLORE THE PORTFOLIO', themeLight: 'Light mode', themeDark: 'Dark mode', terminal: 'Terminal',
-  cv: 'Download CV', cvUnavailable: 'CV coming soon', viewProjects: 'View Projects', getInTouch: 'Get in Touch',
+  cv: 'View CV', cvOpenNewTab: 'View CV (opens in a new tab)', cvUnavailable: 'CV coming soon', viewProjects: 'View Projects', getInTouch: 'Get in Touch',
   about: {
     label: 'ABOUT', title: ['From code to security.', 'Driven by curiosity.'], facts: ['STUDYING', 'FOCUS', 'STACK'],
     studying: ['ASOIU · Computer Engineering', 'MilliSec · Red Team / Pentesting'],
