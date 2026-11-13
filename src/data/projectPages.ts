@@ -25,8 +25,15 @@ export const projectPages = {
     takeawayLabel: 'THE TAKEAWAY', takeawayTitle: 'The lesson is in the server response.',
     takeawayBody: 'A page can hide a button or field, but that alone does not protect the underlying action. This lab compares the server response and saved data so each authorization decision is observable.',
     scopeLabel: 'LAB SCOPE', scopeBody: 'This is an isolated academic exercise using fictional accounts and records. It is not a public target or a live university system.',
+    capturesLabel: 'REAL LAB CAPTURES', capturesTitle: 'What the lab looked like.',
+    capturesIntro: 'These images come from local, isolated lab runs. Open any image to inspect it at full size. Session and local network values are masked.',
+    captures: [
+      { src: '/projects/campussecure/student-dashboard.webp', width: 1825, height: 884, title: 'Student portal', alt: 'CampusSecure student dashboard showing Alice’s account, requests, and announcements.', caption: 'The fictional student dashboard gives the scenarios a familiar setting.' },
+      { src: '/projects/campussecure/object-access-redacted.webp', width: 1480, height: 470, title: 'Object access', alt: 'Burp Repeater capture of GET /api/requests/201 returning HTTP 200 with a record for student ID 2.', caption: 'An API request for record 201 returns another student’s fictional record in the captured vulnerable-mode run.' },
+      { src: '/projects/campussecure/admin-action-redacted.webp', width: 1480, height: 480, title: 'Admin-only action', alt: 'Burp Repeater capture of POST /api/admin/announcements returning HTTP 201 Created.', caption: 'The captured API response shows an announcement being created through the admin endpoint.' }
+    ],
     sourceLabel: 'SOURCE & EVIDENCE', sourceTitle: 'Want the technical detail?',
-    sourceBody: 'The repository contains the application, setup guide, scenario descriptions, and automated tests. Screenshots and a demonstration video have not been published for this project.',
+    sourceBody: 'The repository contains the application, setup guide, scenario descriptions, and automated tests. A demonstration video has not been published for this project.',
     footer: 'Hasanagha Bayramov · Aspiring Penetration Tester'
   },
   az: {
@@ -55,8 +62,15 @@ export const projectPages = {
     takeawayLabel: 'NƏTİCƏ', takeawayTitle: 'Əsas fərq serverin cavabındadır.',
     takeawayBody: 'Səhifədə düyməni və ya sahəni gizlətmək həmin əməliyyatı təkbaşına qorumur. Bu laboratoriyada hər icazə qərarını görmək üçün server cavabı və saxlanılan məlumat müqayisə edilir.',
     scopeLabel: 'LABORATORİYA ÇƏRÇİVƏSİ', scopeBody: 'Bu, uydurma hesab və qeydlərlə aparılan təcrid olunmuş tədris işidir. İctimai hədəf və ya real universitet sistemi deyil.',
+    capturesLabel: 'REAL LABORATORİYA GÖRÜNTÜLƏRİ', capturesTitle: 'Lab necə görünürdü?',
+    capturesIntro: 'Bu görüntülər lokal və təcrid olunmuş laboratoriya sınaqlarından götürülüb. Tam ölçüdə baxmaq üçün şəkli açın. Sessiya və lokal şəbəkə məlumatları örtülüb.',
+    captures: [
+      { src: '/projects/campussecure/student-dashboard.webp', width: 1825, height: 884, title: 'Tələbə portalı', alt: 'CampusSecure tələbə panelində Alice-in hesabı, sorğuları və elanlar görünür.', caption: 'Nümunə tələbə paneli ssenarilərin baş verdiyi mühiti göstərir.' },
+      { src: '/projects/campussecure/object-access-redacted.webp', width: 1480, height: 470, title: 'Obyektə giriş', alt: 'Burp Repeater-də GET /api/requests/201 sorğusu HTTP 200 və tələbə ID-si 2 olan qeydi qaytarır.', caption: 'Zəif rejimdə çəkilmiş sorğuda API 201 nömrəli başqa tələbə qeydini qaytarır.' },
+      { src: '/projects/campussecure/admin-action-redacted.webp', width: 1480, height: 480, title: 'Admin əməliyyatı', alt: 'Burp Repeater-də POST /api/admin/announcements sorğusu HTTP 201 Created cavabı alır.', caption: 'Bu API cavabı admin üçün nəzərdə tutulmuş endpoint vasitəsilə elanın yaradıldığını göstərir.' }
+    ],
     sourceLabel: 'MƏNBƏ VƏ SÜBUT', sourceTitle: 'Texniki detallara baxmaq istəyirsiniz?',
-    sourceBody: 'Repozitoriyada tətbiq, quraşdırma bələdçisi, ssenarilərin izahı və avtomatlaşdırılmış testlər var. Bu layihə üçün screenshot və nümayiş videosu hələ yayımlanmayıb.',
+    sourceBody: 'Repozitoriyada tətbiq, quraşdırma bələdçisi, ssenarilərin izahı və avtomatlaşdırılmış testlər var. Bu layihə üçün nümayiş videosu hələ yayımlanmayıb.',
     footer: 'Həsənağa Bayramov · Gələcək penetrasiya testçisi'
   }
 } as const;

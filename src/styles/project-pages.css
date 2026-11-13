@@ -64,6 +64,14 @@
 .case-takeaway > div > p:last-child, .case-takeaway aside p:last-child { max-width: 700px; color: var(--muted); line-height: 1.75; }
 .case-takeaway aside { padding: 28px; }
 .case-takeaway aside p:last-child { margin-bottom: 0; font-size: 14px; }
+.case-capture-list { display: grid; gap: 28px; margin-top: 34px; }
+.case-capture { margin: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.case-capture a { display: block; overflow: hidden; }
+.case-capture img { display: block; width: 100%; height: auto; }
+.case-capture a:hover img { opacity: .92; }
+.case-capture figcaption { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 18px; padding: 18px 22px; border-top: 1px solid var(--line); }
+.case-capture figcaption strong { font-size: 16px; }
+.case-capture figcaption span { color: var(--muted); font-size: 14px; }
 .case-source { padding-bottom: 0; }
 .case-source-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 24px; margin-top: 28px; }
 .case-source-actions > a:last-child { color: var(--accent); font: 12px 'Geist Mono Variable', monospace; }
@@ -95,5 +103,8 @@
   .case-section > p:not(.eyebrow), .case-section-intro { font-size: 15px; }
   .mode-comparison { grid-template-columns: 1fr; }
   .mode-card { min-height: 155px; padding: 24px; }
+  .case-capture-list { gap: 20px; }
+  .case-capture figcaption { display: block; padding: 16px; }
+  .case-capture figcaption span { display: block; margin-top: 4px; font-size: 13px; }
   .project-page-footer { align-items: flex-start; flex-direction: column; margin-top: 64px; }
 }

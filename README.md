@@ -19,7 +19,7 @@ Place the current, user-approved CV at `public/cv/hasanagha-bayramov.pdf`. Until
 
 The build is static and needs no Vercel adapter. Configure Vercel with `npm run build` and output directory `dist` if automatic Astro detection is unavailable. Home content lives in `src/data/en.ts` and `src/data/az.ts`; case-study copy lives in `src/data/projectPages.ts`. Verified project and certificate links live in `src/data/projects.ts` and `src/data/certificates.ts`.
 
-The CampusSecure index illustration is conceptual. Its case study describes only documented repository behavior; no screenshots or demonstration video are published yet. Add genuine media from an isolated lab session when available.
+The CampusSecure index illustration is conceptual. Its case study describes only documented repository behavior and includes three cropped captures from isolated local lab runs. Session cookies, CSRF values, and local IP addresses are masked in the published captures; the relevant request paths, response codes, and results remain visible. No demonstration video is published yet.
 
 English and Azerbaijani share previews are committed as PNGs under `public/og/`. If the name, role, or focus copy changes, run `npm run social:generate` to regenerate both images from the localized content. The page metadata in `src/layouts/SiteLayout.astro` uses the production origin; update it if the public domain changes.
 
