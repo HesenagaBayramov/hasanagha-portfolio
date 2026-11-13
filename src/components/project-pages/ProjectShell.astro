@@ -1,5 +1,6 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
+import ExternalArrow from '../ui/ExternalArrow.astro';
 import '../../styles/project-pages.css';
 import { projectPages } from '../../data/projectPages';
 import type { Copy, Locale } from '../../data/types';
@@ -31,7 +32,7 @@ const index = locale === 'az' ? '/az/projects' : '/projects';
   <main id="main"><slot /></main>
   <footer class="project-page-footer wrap">
     <span>{t.footer}</span>
-    <a href={home}>{t.navHome} ↗</a>
+    <a href={home}>{t.navHome}<ExternalArrow /></a>
   </footer>
 </SiteLayout>
 <script>

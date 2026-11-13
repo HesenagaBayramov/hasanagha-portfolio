@@ -2,6 +2,7 @@
 import { campusSecure } from '../../data/projects';
 import { projectPages } from '../../data/projectPages';
 import CaseStudyGallery from './CaseStudyGallery.astro';
+import ExternalArrow from '../ui/ExternalArrow.astro';
 import type { Locale } from '../../data/types';
 interface Props { locale: Locale }
 const { locale } = Astro.props;
@@ -18,7 +19,7 @@ const index = locale === 'az' ? '/az/projects' : '/projects';
     <p class="case-hero-intro">{t.detailIntro}</p>
     <div class="case-hero-bottom">
       <div class="tags">{[...campusSecure.technologies, locale === 'az' ? 'Girişə nəzarət' : 'Access control'].map(item => <span class="tag">{item}</span>)}</div>
-      <a class="outline-button" href={campusSecure.url} target="_blank" rel="noopener noreferrer">{t.repository}</a>
+      <a class="outline-button" href={campusSecure.url} target="_blank" rel="noopener noreferrer">{t.repository}<ExternalArrow /></a>
     </div>
   </header>
   <section class="case-section case-purpose" aria-labelledby="purpose-title">
@@ -56,6 +57,6 @@ const index = locale === 'az' ? '/az/projects' : '/projects';
     <p class="eyebrow">{t.sourceLabel}</p>
     <h2 id="source-title">{t.sourceTitle}</h2>
     <p>{t.sourceBody}</p>
-    <div class="case-source-actions"><a class="filled-button" href={campusSecure.url} target="_blank" rel="noopener noreferrer">{t.repository}</a><a href={index}>← {t.backToProjects}</a></div>
+    <div class="case-source-actions"><a class="filled-button" href={campusSecure.url} target="_blank" rel="noopener noreferrer">{t.repository}<ExternalArrow /></a><a href={index}>← {t.backToProjects}</a></div>
   </section>
 </div>

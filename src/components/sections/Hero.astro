@@ -1,5 +1,6 @@
 ---
 import type { Copy } from '../../data/types';
+import ExternalArrow from '../ui/ExternalArrow.astro';
 interface Props { copy: Copy; hasCv: boolean }
 const { copy, hasCv } = Astro.props;
 ---
@@ -17,8 +18,8 @@ const { copy, hasCv } = Astro.props;
     </div>
     <div class="hero-details">
       <span>{copy.location}</span><span class="divider" aria-hidden="true"></span>
-      <a href="mailto:hsnagabayramov4@gmail.com">hsnagabayramov4@gmail.com ↗</a><span class="divider" aria-hidden="true"></span>
-      <span class="hero-social"><a href="https://github.com/HesenagaBayramov" target="_blank" rel="noopener noreferrer">GitHub ↗</a><span class="divider" aria-hidden="true"></span><a href="https://www.linkedin.com/in/hasanagha-bayramov-a4324134a/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></span>
+      <a href="mailto:hsnagabayramov4@gmail.com">hsnagabayramov4@gmail.com<ExternalArrow /></a><span class="divider" aria-hidden="true"></span>
+      <span class="hero-social"><a href="https://github.com/HesenagaBayramov" target="_blank" rel="noopener noreferrer">GitHub<ExternalArrow /></a><span class="divider" aria-hidden="true"></span><a href="https://www.linkedin.com/in/hasanagha-bayramov-a4324134a/" target="_blank" rel="noopener noreferrer">LinkedIn<ExternalArrow /></a></span>
     </div>
   </div>
   <a class="scroll-cue" href="#about">{copy.scroll}</a>

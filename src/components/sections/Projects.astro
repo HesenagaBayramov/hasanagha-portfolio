@@ -1,5 +1,6 @@
 ---
 import SectionHeading from '../ui/SectionHeading.astro';
+import ExternalArrow from '../ui/ExternalArrow.astro';
 import { campusSecure } from '../../data/projects';
 import type { Copy, Locale } from '../../data/types';
 interface Props { copy: Copy; locale: Locale }
@@ -29,7 +30,7 @@ const detailPath = Astro.props.locale === 'az' ? '/az/projects/campussecure' : '
           <h3>{campusSecure.name}</h3>
           <p>{p.description}</p><p>{p.detail}</p>
           <div class="tags">{[...campusSecure.technologies, p.access].map(item => <span class="tag">{item}</span>)}</div>
-          <div class="card-footer"><a class="small-action" href={detailPath}>{p.explore}</a><a class="project-repository-link" href={campusSecure.url} target="_blank" rel="noopener noreferrer">{p.repository}</a></div>
+          <div class="card-footer"><a class="small-action" href={detailPath}>{p.explore}</a><a class="project-repository-link" href={campusSecure.url} target="_blank" rel="noopener noreferrer">{p.repository}<ExternalArrow /></a></div>
         </div>
       </article>
       {[0, 1].map(() => <div class="project-card future-card" aria-label={`${p.future}: ${p.coming}`}>

@@ -1,5 +1,6 @@
 ---
 import { campusSecure } from '../../data/projects';
+import ExternalArrow from '../ui/ExternalArrow.astro';
 import { projectPages } from '../../data/projectPages';
 import type { Locale } from '../../data/types';
 interface Props { locale: Locale }
@@ -28,7 +29,7 @@ const detail = locale === 'az' ? '/az/projects/campussecure' : '/projects/campus
       <div class="tags">{[...campusSecure.technologies, locale === 'az' ? 'Girişə nəzarət' : 'Access control'].map(item => <span class="tag">{item}</span>)}</div>
       <div class="showcase-actions">
         <a class="filled-button" href={detail}>{t.viewCaseStudy} <span aria-hidden="true">→</span></a>
-        <a class="showcase-repo" href={campusSecure.url} target="_blank" rel="noopener noreferrer">{t.repository}</a>
+        <a class="showcase-repo" href={campusSecure.url} target="_blank" rel="noopener noreferrer">{t.repository}<ExternalArrow /></a>
       </div>
     </div>
   </article>

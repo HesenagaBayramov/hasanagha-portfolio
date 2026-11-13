@@ -1,5 +1,6 @@
 ---
 import type { Copy } from '../../data/types';
+import ExternalArrow from '../ui/ExternalArrow.astro';
 interface Props { copy: Copy; hasFormKey: boolean }
 const { copy, hasFormKey } = Astro.props;
 const c = copy.contact;
@@ -17,7 +18,7 @@ const c = copy.contact;
     </button>
     {!hasFormKey && <p class="form-unavailable">{c.unavailable}</p>}
   </form>
-  <a class="contact-email" href="mailto:hsnagabayramov4@gmail.com">hsnagabayramov4@gmail.com ↗</a>
+  <a class="contact-email" href="mailto:hsnagabayramov4@gmail.com">hsnagabayramov4@gmail.com<ExternalArrow /></a>
   <div class="social-links"><a href="https://github.com/HesenagaBayramov" target="_blank" rel="noopener noreferrer"><img class="icon-dark" src="/icons/github.svg" width="18" height="18" alt="" /><img class="icon-light" src="/icons/github-light.svg" width="18" height="18" alt="" />GitHub</a><a href="https://www.linkedin.com/in/hasanagha-bayramov-a4324134a/" target="_blank" rel="noopener noreferrer"><img class="icon-dark" src="/icons/linkedin.svg" width="18" height="18" alt="" /><img class="icon-light" src="/icons/linkedin-light.svg" width="18" height="18" alt="" />LinkedIn</a></div>
   <footer class="site-footer"><p>{c.footer}</p><div class="social-links"><a href="https://github.com/HesenagaBayramov" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img class="icon-dark" src="/icons/github-footer.svg" width="17" height="17" alt="" /><img class="icon-light" src="/icons/github-footer-light.svg" width="17" height="17" alt="" /></a><a href="https://www.linkedin.com/in/hasanagha-bayramov-a4324134a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img class="icon-dark" src="/icons/linkedin-footer.svg" width="17" height="17" alt="" /><img class="icon-light" src="/icons/linkedin-footer-light.svg" width="17" height="17" alt="" /></a></div></footer>
 </div></section>

@@ -1,5 +1,6 @@
 ---
 import SectionHeading from '../ui/SectionHeading.astro';
+import ExternalArrow from '../ui/ExternalArrow.astro';
 import { certificates } from '../../data/certificates';
 import type { Copy } from '../../data/types';
 interface Props { copy: Copy }
@@ -10,6 +11,6 @@ const { certification: c } = Astro.props.copy as Copy;
   <div class="two-grid">{certificates.map((cert, index) => <article class="info-card certificate-card">
     <div class="card-top"><span>HACKERRANK</span><time datetime="2026-05-04">{c.date}</time></div>
     <div><h3>{cert.name}</h3><p class="eyebrow">{c.id} · {cert.id}</p><p>{index === 0 ? c.basicDescription : c.intermediateDescription}</p></div>
-    <div><div class="tags">{c.tags[index].map(tag => <span class="tag">{tag}</span>)}</div><div class="card-footer"><a class="small-action" href={cert.url} target="_blank" rel="noopener noreferrer">{c.view}</a></div></div>
+    <div><div class="tags">{c.tags[index].map(tag => <span class="tag">{tag}</span>)}</div><div class="card-footer"><a class="small-action" href={cert.url} target="_blank" rel="noopener noreferrer">{c.view}<ExternalArrow /></a></div></div>
   </article>)}</div>
 </div></section>

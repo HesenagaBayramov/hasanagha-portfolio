@@ -112,7 +112,7 @@ h1, h2, h3, .monogram, .hero-role { font-family: 'Bricolage Grotesque Variable',
 .info-card h3 { margin: 12px 0 5px; font-size: 28px; line-height: 1.22; }
 .education-link { color: inherit; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 5px; transition: color .18s, text-decoration-color .18s; }
 .education-link:hover, .education-link:focus-visible { color: var(--accent); text-decoration-color: currentColor; }
-.education-link .external-arrow { display: inline-block; margin-left: 6px; color: var(--accent); font-family: 'Geist Mono Variable', monospace; font-size: .65em; vertical-align: .15em; }
+.education-link .external-arrow-icon { color: var(--accent); width: .65em; height: .65em; margin-left: 6px; vertical-align: .05em; }
 .info-card p:not(.eyebrow):not(.card-bottom) { color: var(--muted); font-size: 14px; line-height: 1.6; }
 .card-subtitle { color: var(--accent) !important; }
 .card-bottom { margin: 0; padding-top: 12px; border-top: 1px solid var(--line); color: var(--subtle); font-size: 11px; }
