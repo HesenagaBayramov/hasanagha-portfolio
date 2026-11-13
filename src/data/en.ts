@@ -40,7 +40,7 @@ export const en: Copy = {
   },
   contact: {
     label: 'CONTACT', title: 'Let’s connect.', intro: 'Have an opportunity, a project, or a question about my work? I’d be glad to hear from you.',
-    name: 'Your name', email: 'Your email', message: 'Your message', placeholder: 'Write your message...', send: 'Send message ↗', sending: 'Sending…', success: 'Message sent successfully.', errorTitle: 'Message could not be sent.', error: 'An error occurred. Please try again. Your entries are still in the form.', unavailable: 'Email me directly while the contact form is being set up.', footer: '© 2026 Hasanagha Bayramov · Aspiring Penetration Tester'
+    name: 'Your name', email: 'Your email', message: 'Your message', placeholder: 'Write your message...', send: 'Send message', sending: 'Sending…', success: 'Message sent successfully.', errorTitle: 'Message could not be sent.', error: 'An error occurred. Please try again. Your entries are still in the form.', unavailable: 'Email me directly while the contact form is being set up.', footer: '© 2026 Hasanagha Bayramov · Aspiring Penetration Tester'
   },
   terminalCopy: { title: 'terminal / preview', soundOff: 'SOUND OFF', soundOn: 'SOUND ON', duration: '~7 SEC / KEYBOARD AUDIO', skip: 'Skip', replay: 'Replay', close: 'Close', transcript: '$ whoami\nhasanagha\n\n$ cat focus.txt\noffensive security / web application security / red team\n\n$ ls projects/\nCampusSecure/' }
 };

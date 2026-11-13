@@ -121,6 +121,8 @@ h1, h2, h3, .monogram, .hero-role { font-family: 'Bricolage Grotesque Variable',
 .contact-heading h2 { margin: 12px 0; font-size: 52px; line-height: 1.15; }
 .contact-heading > p:last-child { color: var(--muted); font-size: 17px; }
 .contact-form { width: min(720px, 100%); margin-inline: auto; }
+.contact-submit { display: flex; gap: 8px; margin-inline: auto; }
+.contact-submit svg { flex: none; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .contact-form label { display: block; margin-bottom: 20px; color: var(--muted); font-size: 14px; font-weight: 500; }
 .contact-form input:not(.honeypot), .contact-form textarea { display: block; width: 100%; margin-top: 8px; padding: 13px 14px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--surface); color: var(--text); resize: vertical; }

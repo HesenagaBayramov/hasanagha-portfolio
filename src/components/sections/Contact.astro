@@ -11,7 +11,10 @@ const c = copy.contact;
     <label>{c.message}<textarea name="message" placeholder={c.placeholder} required minlength="10" maxlength="5000" rows="6"></textarea></label>
     <input class="honeypot" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" />
     <div id="form-status" class="form-status" role="status" aria-live="polite" tabindex="-1"></div>
-    <button class="filled-button" type="submit" disabled={!hasFormKey} data-send-label={c.send} data-sending-label={c.sending} data-success={c.success} data-error={`${c.errorTitle} ${c.error}`}>{c.send}</button>
+    <button class="filled-button contact-submit" type="submit" disabled={!hasFormKey} data-send-label={c.send} data-sending-label={c.sending} data-success={c.success} data-error={`${c.errorTitle} ${c.error}`}>
+      <span data-submit-label>{c.send}</span>
+      <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z" /><path d="M22 2 11 13" /></svg>
+    </button>
     {!hasFormKey && <p class="form-unavailable">{c.unavailable}</p>}
   </form>
   <a class="contact-email" href="mailto:hsnagabayramov4@gmail.com">hsnagabayramov4@gmail.com ↗</a>
@@ -30,15 +33,16 @@ const c = copy.contact;
     event.preventDefault();
     if (!form.reportValidity()) return;
     const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const label = button?.querySelector<HTMLElement>('[data-submit-label]');
     const status = form.querySelector<HTMLElement>('#form-status');
-    if (!button || !status || button.disabled) return;
-    button.disabled = true; button.textContent = button.dataset.sendingLabel ?? '';
+    if (!button || !label || !status || button.disabled) return;
+    button.disabled = true; label.textContent = button.dataset.sendingLabel ?? '';
     status.textContent = ''; status.dataset.state = '';
     const result = await submitContact(new FormData(form));
     status.textContent = result.ok ? button.dataset.success ?? '' : button.dataset.error ?? '';
     status.dataset.state = result.ok ? 'success' : 'error';
     if (result.ok) form.reset();
-    button.disabled = false; button.textContent = button.dataset.sendLabel ?? '';
+    button.disabled = false; label.textContent = button.dataset.sendLabel ?? '';
     status.focus();
   });
 </script>
