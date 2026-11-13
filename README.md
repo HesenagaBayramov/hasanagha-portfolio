@@ -15,7 +15,7 @@ npm run build
 
 The contact form uses Web3Forms. Set `PUBLIC_WEB3FORMS_ACCESS_KEY` in the local environment or Vercel project settings to enable its Send button. The key is public in the client bundle by Web3Forms design. The owner reports that the live form works; account recipient, retention, and allowed host settings should still be reviewed when needed.
 
-Place the current, user-approved CV at `public/cv/hasanagha-bayramov.pdf`. Until that file exists, the hero shows a disabled CV action and publishes no download link.
+The current CV is available from the hero's Download CV action at `/cv/hasanagha-bayramov.pdf` on both language routes. Replace `public/cv/hasanagha-bayramov.pdf` when the owner updates the CV; the action stays disabled if the file is absent.
 
 The build is static and needs no Vercel adapter. Configure Vercel with `npm run build` and output directory `dist` if automatic Astro detection is unavailable. Home content lives in `src/data/en.ts` and `src/data/az.ts`; case-study copy lives in `src/data/projectPages.ts`. Verified project and certificate links live in `src/data/projects.ts` and `src/data/certificates.ts`.
 
