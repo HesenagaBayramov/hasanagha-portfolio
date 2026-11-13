@@ -7,6 +7,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "social:generate": "node --experimental-strip-types scripts/generate-social-images.mjs",
     "check": "astro check",
     "test": "node --experimental-strip-types --test tests/*.test.mjs"
   },
@@ -19,6 +20,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.0",
     "@types/node": "^24.0.0",
+    "sharp": "^0.35.5",
     "typescript": "^5.9.0"
   }
 }

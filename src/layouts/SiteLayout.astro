@@ -5,6 +5,12 @@ interface Props { copy: Copy; locale: Locale }
 const { copy, locale } = Astro.props;
 const title = `${copy.name} — ${copy.role}`;
 const description = copy.description;
+const origin = 'https://hasanaghabayramov.vercel.app';
+const pageUrl = `${origin}${locale === 'az' ? '/az' : '/'}`;
+const imageUrl = `${origin}/og/portfolio-${locale}.png`;
+const imageAlt = locale === 'az'
+  ? 'Tünd fonda Həsənağa Bayramovun adı, peşə istiqaməti və HB. monoqramı.'
+  : 'Dark preview showing Hasanagha Bayramov, his role and the HB. monogram.';
 ---
 <!doctype html>
 <html lang={locale} data-theme="dark">
@@ -13,8 +19,21 @@ const description = copy.description;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0b1520" />
-    <link rel="alternate" hreflang="en" href="/" />
-    <link rel="alternate" hreflang="az" href="/az" />
+    <link rel="canonical" href={pageUrl} />
+    <link rel="alternate" hreflang="en" href={`${origin}/`} />
+    <link rel="alternate" hreflang="az" href={`${origin}/az`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta property="og:locale" content={locale === 'az' ? 'az_AZ' : 'en_US'} />
+    <meta property="og:locale:alternate" content={locale === 'az' ? 'en_US' : 'az_AZ'} />
+    <meta name="twitter:card" content="summary_large_image" />
     <title>{title}</title>
     <script is:inline>
       const navigation = performance.getEntriesByType('navigation')[0];
