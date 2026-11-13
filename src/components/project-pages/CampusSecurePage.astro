@@ -1,6 +1,7 @@
 ---
 import { campusSecure } from '../../data/projects';
 import { projectPages } from '../../data/projectPages';
+import CaseStudyGallery from './CaseStudyGallery.astro';
 import type { Locale } from '../../data/types';
 interface Props { locale: Locale }
 const { locale } = Astro.props;
@@ -50,19 +51,7 @@ const index = locale === 'az' ? '/az/projects' : '/projects';
     <div><p class="eyebrow">{t.takeawayLabel}</p><h2 id="takeaway-title">{t.takeawayTitle}</h2><p>{t.takeawayBody}</p></div>
     <aside><p class="eyebrow">{t.scopeLabel}</p><p>{t.scopeBody}</p></aside>
   </section>
-  <section class="case-section case-captures" aria-labelledby="captures-title">
-    <p class="eyebrow">{t.capturesLabel}</p>
-    <h2 id="captures-title">{t.capturesTitle}</h2>
-    <p class="case-section-intro">{t.capturesIntro}</p>
-    <div class="case-capture-list">
-      {t.captures.map(capture => <figure class="case-capture">
-        <a href={capture.src} target="_blank" rel="noopener noreferrer" aria-label={`${capture.alt} — ${locale === 'az' ? 'şəkli yeni tabda aç' : 'open image in a new tab'}`}>
-          <img src={capture.src} width={capture.width} height={capture.height} alt={capture.alt} loading="lazy" decoding="async" />
-        </a>
-        <figcaption><strong>{capture.title}</strong><span>{capture.caption}</span></figcaption>
-      </figure>)}
-    </div>
-  </section>
+  <CaseStudyGallery locale={locale} />
   <section class="case-section case-source" aria-labelledby="source-title">
     <p class="eyebrow">{t.sourceLabel}</p>
     <h2 id="source-title">{t.sourceTitle}</h2>

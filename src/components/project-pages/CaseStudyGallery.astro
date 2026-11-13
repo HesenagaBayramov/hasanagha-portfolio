@@ -1,0 +1,130 @@
+---
+import { projectPages } from '../../data/projectPages';
+import type { Locale } from '../../data/types';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = projectPages[locale];
+---
+
+<section class="case-section case-captures" aria-labelledby="captures-title">
+  <p class="eyebrow">{t.capturesLabel}</p>
+  <h2 id="captures-title">{t.capturesTitle}</h2>
+  <p class="case-section-intro">{t.capturesIntro}</p>
+  <div class="case-capture-list">
+    {t.captures.map((capture, index) => <figure class="case-capture">
+      <a href={capture.src} target="_blank" rel="noopener noreferrer" data-gallery-trigger data-gallery-index={index} aria-label={`${capture.alt} — ${t.galleryOpen}`}>
+        <img src={capture.src} width={capture.width} height={capture.height} alt={capture.alt} loading="lazy" decoding="async" />
+      </a>
+      <figcaption><strong>{capture.title}</strong><span>{capture.caption}</span></figcaption>
+    </figure>)}
+  </div>
+</section>
+
+<dialog class="case-gallery" aria-labelledby="case-gallery-title" data-case-gallery data-zoom-label={t.galleryZoom} data-fit-label={t.galleryFit}>
+  <div class="case-gallery-shell">
+    <header class="case-gallery-top">
+      <div><p class="eyebrow">{t.galleryLabel}</p><h2 id="case-gallery-title">{t.capturesTitle}</h2></div>
+      <div class="case-gallery-tools">
+        <button class="case-gallery-button case-gallery-zoom" type="button" data-gallery-zoom aria-pressed="false">{t.galleryZoom}</button>
+        <button class="case-gallery-button" type="button" data-gallery-close aria-label={t.galleryClose}><span aria-hidden="true">×</span></button>
+      </div>
+    </header>
+    <div class="case-gallery-stage" data-gallery-stage>
+      <img src={t.captures[0].src} alt={t.captures[0].alt} data-gallery-image decoding="async" />
+    </div>
+    <div class="case-gallery-footer">
+      <button class="case-gallery-button" type="button" data-gallery-previous aria-label={t.galleryPrevious}><span aria-hidden="true">←</span></button>
+      <div class="case-gallery-info" aria-live="polite">
+        <span data-gallery-counter>1 / {t.captures.length}</span>
+        <strong data-gallery-title>{t.captures[0].title}</strong>
+        <p data-gallery-caption>{t.captures[0].caption}</p>
+      </div>
+      <button class="case-gallery-button" type="button" data-gallery-next aria-label={t.galleryNext}><span aria-hidden="true">→</span></button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  const gallery = document.querySelector<HTMLDialogElement>('[data-case-gallery]');
+  const triggers = [...document.querySelectorAll<HTMLAnchorElement>('[data-gallery-trigger]')];
+
+  if (gallery && typeof gallery.showModal === 'function' && triggers.length > 0) {
+    const image = gallery.querySelector<HTMLImageElement>('[data-gallery-image]');
+    const stage = gallery.querySelector<HTMLElement>('[data-gallery-stage]');
+    const closeButton = gallery.querySelector<HTMLButtonElement>('[data-gallery-close]');
+    const zoomButton = gallery.querySelector<HTMLButtonElement>('[data-gallery-zoom]');
+    const previousButton = gallery.querySelector<HTMLButtonElement>('[data-gallery-previous]');
+    const nextButton = gallery.querySelector<HTMLButtonElement>('[data-gallery-next]');
+    const counter = gallery.querySelector<HTMLElement>('[data-gallery-counter]');
+    const title = gallery.querySelector<HTMLElement>('[data-gallery-title]');
+    const caption = gallery.querySelector<HTMLElement>('[data-gallery-caption]');
+
+    if (image && stage && closeButton && zoomButton && previousButton && nextButton && counter && title && caption) {
+      const slides = triggers.map(trigger => {
+        const figure = trigger.closest('figure');
+        return {
+          src: trigger.href,
+          alt: trigger.querySelector('img')?.alt ?? '',
+          title: figure?.querySelector('figcaption strong')?.textContent ?? '',
+          caption: figure?.querySelector('figcaption span')?.textContent ?? ''
+        };
+      });
+      let activeIndex = 0;
+      let opener: HTMLAnchorElement | null = null;
+
+      const resetZoom = () => {
+        stage.classList.remove('is-zoomed');
+        stage.scrollTop = 0;
+        stage.scrollLeft = 0;
+        zoomButton.setAttribute('aria-pressed', 'false');
+        zoomButton.textContent = gallery.dataset.zoomLabel ?? '';
+      };
+
+      const showSlide = (index: number) => {
+        if (index < 0 || index >= slides.length) return;
+        activeIndex = index;
+        const slide = slides[index];
+        resetZoom();
+        image.src = slide.src;
+        image.alt = slide.alt;
+        counter.textContent = `${index + 1} / ${slides.length}`;
+        title.textContent = slide.title;
+        caption.textContent = slide.caption;
+        previousButton.disabled = index === 0;
+        nextButton.disabled = index === slides.length - 1;
+      };
+
+      triggers.forEach((trigger, index) => trigger.addEventListener('click', event => {
+        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        opener = trigger;
+        showSlide(index);
+        gallery.showModal();
+        document.body.classList.add('case-gallery-open');
+        closeButton.focus();
+      }));
+
+      closeButton.addEventListener('click', () => gallery.close());
+      previousButton.addEventListener('click', () => showSlide(activeIndex - 1));
+      nextButton.addEventListener('click', () => showSlide(activeIndex + 1));
+      zoomButton.addEventListener('click', () => {
+        const zoomed = stage.classList.toggle('is-zoomed');
+        stage.scrollTop = 0;
+        stage.scrollLeft = 0;
+        zoomButton.setAttribute('aria-pressed', String(zoomed));
+        zoomButton.textContent = zoomed ? gallery.dataset.fitLabel ?? '' : gallery.dataset.zoomLabel ?? '';
+      });
+      gallery.addEventListener('keydown', event => {
+        if (event.key === 'ArrowLeft') { event.preventDefault(); showSlide(activeIndex - 1); }
+        if (event.key === 'ArrowRight') { event.preventDefault(); showSlide(activeIndex + 1); }
+      });
+      gallery.addEventListener('click', event => { if (event.target === gallery) gallery.close(); });
+      gallery.addEventListener('close', () => {
+        document.body.classList.remove('case-gallery-open');
+        resetZoom();
+        opener?.focus({ preventScroll: true });
+      });
+    }
+  }
+</script>

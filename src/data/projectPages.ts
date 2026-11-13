@@ -26,7 +26,8 @@ export const projectPages = {
     takeawayBody: 'A page can hide a button or field, but that alone does not protect the underlying action. This lab compares the server response and saved data so each authorization decision is observable.',
     scopeLabel: 'LAB SCOPE', scopeBody: 'This is an isolated academic exercise using fictional accounts and records. It is not a public target or a live university system.',
     capturesLabel: 'REAL LAB CAPTURES', capturesTitle: 'What the lab looked like.',
-    capturesIntro: 'These images come from local, isolated lab runs. Open any image to inspect it at full size. Session and local network values are masked.',
+    capturesIntro: 'These images come from local, isolated lab runs. Select an image to inspect it in the gallery. Session and local network values are masked.',
+    galleryLabel: 'LAB GALLERY', galleryOpen: 'view in gallery', galleryClose: 'Close gallery', galleryPrevious: 'Previous image', galleryNext: 'Next image', galleryZoom: 'Zoom in', galleryFit: 'Fit image',
     captures: [
       { src: '/projects/campussecure/student-dashboard.webp', width: 1825, height: 884, title: 'Student portal', alt: 'CampusSecure student dashboard showing Alice’s account, requests, and announcements.', caption: 'The fictional student dashboard gives the scenarios a familiar setting.' },
       { src: '/projects/campussecure/object-access-redacted.webp', width: 1480, height: 470, title: 'Object access', alt: 'Burp Repeater capture of GET /api/requests/201 returning HTTP 200 with a record for student ID 2.', caption: 'An API request for record 201 returns another student’s fictional record in the captured vulnerable-mode run.' },
@@ -63,7 +64,8 @@ export const projectPages = {
     takeawayBody: 'Səhifədə düyməni və ya sahəni gizlətmək həmin əməliyyatı təkbaşına qorumur. Bu laboratoriyada hər icazə qərarını görmək üçün server cavabı və saxlanılan məlumat müqayisə edilir.',
     scopeLabel: 'LABORATORİYA ÇƏRÇİVƏSİ', scopeBody: 'Bu, uydurma hesab və qeydlərlə aparılan təcrid olunmuş tədris işidir. İctimai hədəf və ya real universitet sistemi deyil.',
     capturesLabel: 'REAL LABORATORİYA GÖRÜNTÜLƏRİ', capturesTitle: 'Lab necə görünürdü?',
-    capturesIntro: 'Bu görüntülər lokal və təcrid olunmuş laboratoriya sınaqlarından götürülüb. Tam ölçüdə baxmaq üçün şəkli açın. Sessiya və lokal şəbəkə məlumatları örtülüb.',
+    capturesIntro: 'Bu görüntülər lokal və təcrid olunmuş laboratoriya sınaqlarından götürülüb. Qalereyada baxmaq üçün şəkli seçin. Sessiya və lokal şəbəkə məlumatları örtülüb.',
+    galleryLabel: 'LAB QALEREYASI', galleryOpen: 'qalereyada bax', galleryClose: 'Qalereyanı bağla', galleryPrevious: 'Əvvəlki şəkil', galleryNext: 'Növbəti şəkil', galleryZoom: 'Böyüt', galleryFit: 'Sığdır',
     captures: [
       { src: '/projects/campussecure/student-dashboard.webp', width: 1825, height: 884, title: 'Tələbə portalı', alt: 'CampusSecure tələbə panelində Alice-in hesabı, sorğuları və elanlar görünür.', caption: 'Nümunə tələbə paneli ssenarilərin baş verdiyi mühiti göstərir.' },
       { src: '/projects/campussecure/object-access-redacted.webp', width: 1480, height: 470, title: 'Obyektə giriş', alt: 'Burp Repeater-də GET /api/requests/201 sorğusu HTTP 200 və tələbə ID-si 2 olan qeydi qaytarır.', caption: 'Zəif rejimdə çəkilmiş sorğuda API 201 nömrəli başqa tələbə qeydini qaytarır.' },

@@ -61,12 +61,34 @@
 .case-takeaway aside p:last-child { margin-bottom: 0; font-size: 14px; }
 .case-capture-list { display: grid; gap: 28px; margin-top: 34px; }
 .case-capture { margin: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
-.case-capture a { display: block; overflow: hidden; }
+.case-capture a { display: block; overflow: hidden; cursor: zoom-in; }
 .case-capture img { display: block; width: 100%; height: auto; }
 .case-capture a:hover img { opacity: .92; }
+.case-capture a:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
 .case-capture figcaption { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 18px; padding: 18px 22px; border-top: 1px solid var(--line); }
 .case-capture figcaption strong { font-size: 16px; }
 .case-capture figcaption span { color: var(--muted); font-size: 14px; }
+body.case-gallery-open { overflow: hidden; }
+.case-gallery { width: min(1100px, calc(100% - 24px)); max-height: calc(100dvh - 24px); padding: 0; border: 1px solid var(--line-strong); border-radius: 12px; background: var(--surface); color: var(--text); box-shadow: 0 24px 80px var(--shadow); }
+.case-gallery::backdrop { background: rgba(2, 11, 17, .86); }
+.case-gallery-shell { display: flex; flex-direction: column; max-height: calc(100dvh - 24px); }
+.case-gallery-top { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 16px 22px; border-bottom: 1px solid var(--line); }
+.case-gallery-top h2 { margin: 4px 0 0; font-size: 24px; line-height: 1.2; }
+.case-gallery-tools { display: flex; align-items: center; gap: 8px; }
+.case-gallery-button { display: inline-flex; flex: none; align-items: center; justify-content: center; min-width: 44px; height: 44px; padding: 0 10px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--surface-2); color: var(--text); font-size: 22px; cursor: pointer; }
+.case-gallery-button:hover { border-color: var(--accent); color: var(--accent); }
+.case-gallery-button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.case-gallery-button:disabled { opacity: .35; cursor: not-allowed; }
+.case-gallery-zoom { padding-inline: 14px; font: 500 12px 'Geist Mono Variable', monospace; }
+.case-gallery-stage { display: flex; flex: 1; align-items: center; justify-content: center; min-height: 0; height: min(68dvh, 680px); padding: 16px; overflow: auto; background: var(--bg); }
+.case-gallery-stage img { display: block; width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain; }
+.case-gallery-stage.is-zoomed { display: block; }
+.case-gallery-stage.is-zoomed img { width: auto; height: auto; max-width: none; max-height: none; }
+.case-gallery-footer { display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; align-items: center; gap: 18px; padding: 16px 22px; border-top: 1px solid var(--line); }
+.case-gallery-info { min-width: 0; text-align: center; }
+.case-gallery-info > span { display: block; margin-bottom: 4px; color: var(--accent); font: 500 11px 'Geist Mono Variable', monospace; }
+.case-gallery-info strong { display: block; font-size: 16px; }
+.case-gallery-info p { margin: 4px auto 0; max-width: 700px; color: var(--muted); font-size: 13px; line-height: 1.5; }
 .case-source { padding-bottom: 0; }
 .case-source-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 24px; margin-top: 28px; }
 .case-source-actions > a:last-child { color: var(--accent); font: 12px 'Geist Mono Variable', monospace; }
@@ -111,5 +133,15 @@
   .case-capture-list { gap: 20px; }
   .case-capture figcaption { display: block; padding: 16px; }
   .case-capture figcaption span { display: block; margin-top: 4px; font-size: 13px; }
+  .case-gallery { width: calc(100% - 16px); max-height: calc(100dvh - 16px); }
+  .case-gallery-shell { max-height: calc(100dvh - 16px); }
+  .case-gallery-top { gap: 12px; padding: 12px; }
+  .case-gallery-top h2 { font-size: 19px; }
+  .case-gallery-button { min-width: 38px; height: 38px; }
+  .case-gallery-zoom { padding-inline: 8px; font-size: 11px; }
+  .case-gallery-stage { height: 58dvh; padding: 8px; }
+  .case-gallery-footer { grid-template-columns: 38px minmax(0, 1fr) 38px; gap: 8px; padding: 12px; }
+  .case-gallery-info strong { font-size: 14px; }
+  .case-gallery-info p { font-size: 11px; }
   .project-page-footer { align-items: flex-start; flex-direction: column; margin-top: 64px; }
 }
