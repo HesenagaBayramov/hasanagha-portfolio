@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "postbuild": "node scripts/verify-security-headers.mjs",
     "preview": "astro preview",
     "social:generate": "node --experimental-strip-types scripts/generate-social-images.mjs",
     "check": "astro check",
