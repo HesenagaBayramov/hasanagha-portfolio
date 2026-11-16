@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://hasanaghabayramov.vercel.app',
+  site: 'https://hasanaghas.com',
   output: 'static',
   trailingSlash: 'never',
   integrations: [sitemap({
