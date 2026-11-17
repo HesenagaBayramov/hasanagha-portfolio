@@ -43,6 +43,8 @@ for (const file of files) {
     if (/\bsrc\s*=/.test(attributes)) {
       const source = attributes.match(/\bsrc\s*=\s*["']([^"']+)["']/)?.[1];
       assert.ok(source?.startsWith('/'), `${file} loads a script outside the allowed origin`);
+    } else if (/\btype\s*=\s*["']application\/ld\+json["']/i.test(attributes)) {
+      JSON.parse(body); // Structured data is a non-executable data block, not a CSP script hash.
     } else if (body.length) {
       actualHashes.add(`'sha256-${createHash('sha256').update(body).digest('base64')}'`);
     }

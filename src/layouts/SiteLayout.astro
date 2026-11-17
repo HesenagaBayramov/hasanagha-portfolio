@@ -9,6 +9,8 @@ const title = pageTitle ? `${pageTitle} — ${copy.name}` : `${copy.name} — ${
 const description = pageDescription ?? copy.description;
 if (!Astro.site) throw new Error('The site URL is required for canonical and social metadata');
 const origin = Astro.site.origin;
+const siteName = 'Hasanagha Bayramov';
+const isDomainHomepage = locale === 'en' && pagePath === undefined;
 const pageUrl = `${origin}${pagePath ?? (locale === 'az' ? '/az' : '/')}`;
 const enUrl = `${origin}${locale === 'en' ? (pagePath ?? '/') : (alternatePath ?? '/')}`;
 const azUrl = `${origin}${locale === 'az' ? (pagePath ?? '/az') : (alternatePath ?? '/az')}`;
@@ -32,6 +34,7 @@ const imageAlt = locale === 'az'
     <link rel="alternate" hreflang="en" href={enUrl} />
     <link rel="alternate" hreflang="az" href={azUrl} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={pageUrl} />
@@ -48,6 +51,12 @@ const imageAlt = locale === 'az'
     <meta name="twitter:image" content={imageUrl} />
     <meta name="twitter:image:alt" content={imageAlt} />
     <title>{title}</title>
+    {isDomainHomepage && <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: siteName,
+      url: `${origin}/`
+    })} />}
     <script is:inline>
       const navigation = performance.getEntriesByType('navigation')[0];
       if (navigation?.type === 'reload') {
