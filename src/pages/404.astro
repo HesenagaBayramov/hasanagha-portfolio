@@ -6,8 +6,8 @@ import '../styles/not-found.css';
 <SiteLayout copy={en} locale="en" pageTitle="Page not found" pageDescription="This page could not be found. Return to Hasanagha Bayramov's portfolio or explore his projects." pagePath="/404" isNotFound>
   <div class="not-found-page wrap">
     <header class="not-found-header">
-      <a class="monogram" href="/" aria-label="Hasanagha Bayramov — home">HB.</a>
-      <nav class="not-found-languages" aria-label="Language">
+      <a class="monogram" href="/" aria-label="Hasanagha Bayramov — home" data-home-label>HB.</a>
+      <nav class="not-found-languages" aria-label="Language" data-language-label>
         <a href="/" lang="en">EN</a>
         <span aria-hidden="true">/</span>
         <a href="/az" lang="az">AZ</a>
@@ -45,13 +45,13 @@ import '../styles/not-found.css';
             <circle cx="345" cy="50" r="6" stroke="currentColor" stroke-width="2" />
             <path d="m219 10 10 10-10 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
-          <span class="not-found-visual-label">ROUTE / NOT FOUND</span>
+          <span class="not-found-visual-label" data-visual-label>ROUTE / NOT FOUND</span>
         </div>
       </div>
     </main>
 
     <footer class="not-found-footer">
-      <span>Hasanagha Bayramov</span>
+      <span data-footer-name>Hasanagha Bayramov</span>
       <a href="/" data-footer-locale="en">Portfolio home →</a>
       <a href="/az" data-footer-locale="az" lang="az" hidden>Portfolio ana səhifəsi →</a>
     </footer>
@@ -63,6 +63,18 @@ import '../styles/not-found.css';
   const activeLocale = isAzerbaijaniPath ? 'az' : 'en';
   document.documentElement.lang = activeLocale;
   document.title = isAzerbaijaniPath ? 'Səhifə tapılmadı — Həsənağa Bayramov' : 'Page not found — Hasanagha Bayramov';
+  if (isAzerbaijaniPath) {
+    const skipLink = document.querySelector<HTMLAnchorElement>('.skip-link');
+    const homeLink = document.querySelector<HTMLAnchorElement>('[data-home-label]');
+    const languageNav = document.querySelector<HTMLElement>('[data-language-label]');
+    const visualLabel = document.querySelector<HTMLElement>('[data-visual-label]');
+    const footerName = document.querySelector<HTMLElement>('[data-footer-name]');
+    if (skipLink) skipLink.textContent = 'Əsas məzmuna keç';
+    homeLink?.setAttribute('aria-label', 'Həsənağa Bayramov — ana səhifə');
+    languageNav?.setAttribute('aria-label', 'Dil');
+    if (visualLabel) visualLabel.textContent = 'MARŞRUT / TAPILMADI';
+    if (footerName) footerName.textContent = 'Həsənağa Bayramov';
+  }
   document.querySelectorAll<HTMLElement>('[data-error-locale], [data-footer-locale]').forEach((element) => {
     element.hidden = element.dataset.errorLocale !== activeLocale && element.dataset.footerLocale !== activeLocale;
   });
