@@ -1,0 +1,69 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { en } from '../data/en';
+import '../styles/not-found.css';
+---
+<SiteLayout copy={en} locale="en" pageTitle="Page not found" pageDescription="This page could not be found. Return to Hasanagha Bayramov's portfolio or explore his projects." pagePath="/404" isNotFound>
+  <div class="not-found-page wrap">
+    <header class="not-found-header">
+      <a class="monogram" href="/" aria-label="Hasanagha Bayramov — home">HB.</a>
+      <nav class="not-found-languages" aria-label="Language">
+        <a href="/" lang="en">EN</a>
+        <span aria-hidden="true">/</span>
+        <a href="/az" lang="az">AZ</a>
+      </nav>
+    </header>
+
+    <main id="main" class="not-found-main">
+      <div class="not-found-panel">
+        <div class="not-found-content" data-error-locale="en">
+          <p class="eyebrow">ERROR 404 / PAGE NOT FOUND</p>
+          <h1>This path ends here.</h1>
+          <p class="not-found-description">The address may have changed, or the page may never have existed. You can head back to the portfolio or explore the projects.</p>
+          <div class="not-found-actions">
+            <a class="filled-button" href="/">Back to home <span aria-hidden="true">→</span></a>
+            <a class="outline-button" href="/projects">Explore projects</a>
+          </div>
+        </div>
+        <div class="not-found-content" data-error-locale="az" lang="az" hidden>
+          <p class="eyebrow">XƏTA 404 / SƏHİFƏ TAPILMADI</p>
+          <h1>Bu yol burada bitir.</h1>
+          <p class="not-found-description">Ünvan dəyişmiş ola bilər və ya bu səhifə heç vaxt mövcud olmayıb. Portfolionun ana səhifəsinə qayıda və ya layihələrə baxa bilərsən.</p>
+          <div class="not-found-actions">
+            <a class="filled-button" href="/az">Ana səhifəyə qayıt <span aria-hidden="true">→</span></a>
+            <a class="outline-button" href="/az/projects">Layihələrə bax</a>
+          </div>
+        </div>
+
+        <div class="not-found-visual" aria-hidden="true">
+          <span class="not-found-number">404</span>
+          <svg class="not-found-route" viewBox="0 0 360 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="15" cy="50" r="6" fill="currentColor" />
+            <path d="M21 50h90c16 0 23-30 44-30h36" stroke="currentColor" stroke-width="2" />
+            <path d="M191 20h23" stroke="currentColor" stroke-width="2" stroke-dasharray="5 7" />
+            <path d="M236 20h25c18 0 24 30 43 30h41" stroke="currentColor" stroke-width="2" />
+            <circle cx="345" cy="50" r="6" stroke="currentColor" stroke-width="2" />
+            <path d="m219 10 10 10-10 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <span class="not-found-visual-label">ROUTE / NOT FOUND</span>
+        </div>
+      </div>
+    </main>
+
+    <footer class="not-found-footer">
+      <span>Hasanagha Bayramov</span>
+      <a href="/" data-footer-locale="en">Portfolio home →</a>
+      <a href="/az" data-footer-locale="az" lang="az" hidden>Portfolio ana səhifəsi →</a>
+    </footer>
+  </div>
+</SiteLayout>
+
+<script>
+  const isAzerbaijaniPath = /^\/az(?:\/|$)/.test(window.location.pathname);
+  const activeLocale = isAzerbaijaniPath ? 'az' : 'en';
+  document.documentElement.lang = activeLocale;
+  document.title = isAzerbaijaniPath ? 'Səhifə tapılmadı — Həsənağa Bayramov' : 'Page not found — Hasanagha Bayramov';
+  document.querySelectorAll<HTMLElement>('[data-error-locale], [data-footer-locale]').forEach((element) => {
+    element.hidden = element.dataset.errorLocale !== activeLocale && element.dataset.footerLocale !== activeLocale;
+  });
+</script>

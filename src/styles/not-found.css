@@ -1,0 +1,31 @@
+.not-found-page { min-height: 100svh; display: flex; flex-direction: column; }
+.not-found-header { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.not-found-languages { display: flex; align-items: center; gap: 14px; color: var(--subtle); font: 12px/1.5 'Geist Mono Variable', monospace; }
+.not-found-languages a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; color: var(--accent); }
+.not-found-languages a:hover { color: var(--text); }
+.not-found-main { flex: 1; display: grid; align-items: center; padding-block: 60px 90px; }
+.not-found-panel { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr); align-items: center; gap: clamp(32px, 5vw, 72px); padding: clamp(30px, 5.5vw, 72px); border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+.not-found-content h1 { max-width: 650px; margin: 18px 0 22px; font-size: clamp(44px, 5.4vw, 72px); font-weight: 650; letter-spacing: -.04em; line-height: 1.08; }
+.not-found-description { max-width: 540px; margin-bottom: 32px; color: var(--muted); font-size: clamp(16px, 1.6vw, 18px); line-height: 1.7; }
+.not-found-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.not-found-actions .filled-button, .not-found-actions .outline-button { gap: 12px; min-height: 50px; }
+.not-found-visual { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 0; padding: 28px 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--accent); }
+.not-found-number { font: 650 clamp(90px, 12vw, 172px)/1 'Bricolage Grotesque Variable', sans-serif; letter-spacing: -.07em; }
+.not-found-route { display: block; width: min(100%, 360px); height: auto; margin: 12px auto; }
+.not-found-visual-label { color: var(--subtle); font: 11px/1.5 'Geist Mono Variable', monospace; letter-spacing: .08em; }
+.not-found-footer { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 88px; border-top: 1px solid var(--line); color: var(--subtle); font: 12px/1.5 'Geist Mono Variable', monospace; }
+.not-found-footer a { color: var(--accent); }
+@media (max-width: 760px) {
+  .not-found-header { min-height: 68px; }
+  .not-found-main { padding-block: 32px 64px; }
+  .not-found-panel { grid-template-columns: 1fr; }
+  .not-found-visual { min-height: 210px; }
+  .not-found-number { font-size: clamp(95px, 22vw, 150px); }
+}
+@media (max-width: 480px) {
+  .not-found-panel { padding: 28px 22px; }
+  .not-found-content h1 { font-size: clamp(40px, 11vw, 52px); }
+  .not-found-actions { flex-direction: column; align-items: stretch; }
+  .not-found-actions a { width: 100%; }
+  .not-found-footer { flex-wrap: wrap; padding-block: 20px; }
+}

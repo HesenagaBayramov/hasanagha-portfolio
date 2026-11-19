@@ -19,6 +19,8 @@ The hero's View CV action opens `/cv/hasanagha-bayramov.pdf` in a new tab on bot
 
 The build is static and needs no Vercel adapter. Configure Vercel with `npm run build` and output directory `dist` if automatic Astro detection is unavailable. Home content lives in `src/data/en.ts` and `src/data/az.ts`; case-study copy lives in `src/data/projectPages.ts`. Verified project and certificate links live in `src/data/projects.ts` and `src/data/certificates.ts`.
 
+Unknown URLs use `src/pages/404.astro`, which Astro builds as `dist/404.html` for Vercel's static 404 fallback. The page follows the site's theme, offers home and project links, and shows Azerbaijani copy for missing `/az/...` paths. It is excluded from the sitemap and marked `noindex`.
+
 The production origin is `https://hasanaghas.com`, configured once in `astro.config.mjs`. Astro uses it for canonical, alternate-language, Open Graph, and sitemap URLs; `/robots.txt` points to the generated `/sitemap-index.xml`. The shared layout includes the new domain's Google Search Console verification tag. Vercel Project Settings → Domains serves the apex domain as Production and permanently redirects `www.hasanaghas.com` to it with 308. The former `hasanaghabayramov.vercel.app` address was intentionally removed; it is not part of the public site. Favicon source is `public/favicon.svg`; the single linked search/browser favicon is its 96 px PNG version, and the Apple touch icon uses the same artwork. Google Search may take days or weeks to recrawl the homepage and display the favicon.
 
 The domain homepage provides `WebSite` JSON-LD with the preferred Google site name `Hasanagha Bayramov`; all routes publish the same `og:site_name`. This is a preference signal, not a guarantee that Google will display it.

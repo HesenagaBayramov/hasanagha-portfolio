@@ -3,8 +3,8 @@ import '../styles/global.css';
 import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
 import type { Copy, Locale } from '../data/types';
-interface Props { copy: Copy; locale: Locale; pageTitle?: string; pageDescription?: string; pagePath?: string; alternatePath?: string }
-const { copy, locale, pageTitle, pageDescription, pagePath, alternatePath } = Astro.props;
+interface Props { copy: Copy; locale: Locale; pageTitle?: string; pageDescription?: string; pagePath?: string; alternatePath?: string; isNotFound?: boolean }
+const { copy, locale, pageTitle, pageDescription, pagePath, alternatePath, isNotFound = false } = Astro.props;
 const title = pageTitle ? `${pageTitle} — ${copy.name}` : `${copy.name} — ${copy.role}`;
 const description = pageDescription ?? copy.description;
 if (!Astro.site) throw new Error('The site URL is required for canonical and social metadata');
@@ -25,31 +25,34 @@ const imageAlt = locale === 'az'
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    {isNotFound && <meta name="robots" content="noindex" />}
     <meta name="google-site-verification" content="sdW4KqNiCQg1oMimV40QEc63qPjxWj9k80UQ1nMibFM" />
     <meta name="theme-color" content="#0b1520" />
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <link rel="canonical" href={pageUrl} />
-    <link rel="alternate" hreflang="en" href={enUrl} />
-    <link rel="alternate" hreflang="az" href={azUrl} />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content={siteName} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={pageUrl} />
-    <meta property="og:image" content={imageUrl} />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={imageAlt} />
-    <meta property="og:locale" content={locale === 'az' ? 'az_AZ' : 'en_US'} />
-    <meta property="og:locale:alternate" content={locale === 'az' ? 'en_US' : 'az_AZ'} />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={imageUrl} />
-    <meta name="twitter:image:alt" content={imageAlt} />
+    {!isNotFound && <Fragment>
+      <link rel="canonical" href={pageUrl} />
+      <link rel="alternate" hreflang="en" href={enUrl} />
+      <link rel="alternate" hreflang="az" href={azUrl} />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content={siteName} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:url" content={pageUrl} />
+      <meta property="og:image" content={imageUrl} />
+      <meta property="og:image:type" content="image/png" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content={imageAlt} />
+      <meta property="og:locale" content={locale === 'az' ? 'az_AZ' : 'en_US'} />
+      <meta property="og:locale:alternate" content={locale === 'az' ? 'en_US' : 'az_AZ'} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={imageUrl} />
+      <meta name="twitter:image:alt" content={imageAlt} />
+    </Fragment>}
     <title>{title}</title>
     {isDomainHomepage && <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
